@@ -23,37 +23,88 @@ export default [
     ],
   },
   {
-    path: '/welcome',
-    name: 'welcome',
-    icon: 'smile',
-    component: './Welcome',
-  },
-  {
-    path: '/admin',
-    name: 'admin',
-    icon: 'crown',
-    access: 'canAdmin',
+    path: '/user-account',
+    name: 'userAccount', // 用户账号
+    icon: 'user', // 假设图标
     routes: [
       {
-        path: '/admin',
-        redirect: '/admin/sub-page',
+        path: '/user-account/account-management',
+        name: 'accountManagement', // 账号管理
+        component: './UserAccount/AccountManagement', // 占位符组件
       },
       {
-        path: '/admin/sub-page',
-        name: 'sub-page',
-        component: './Admin',
+        path: '/user-account/role-management',
+        name: 'roleManagement', // 角色管理
+        component: './UserAccount/RoleManagement', // 占位符组件
+      },
+      {
+        path: '/user-account/enterprise-certification',
+        name: 'enterpriseCertification', // 企业认证
+        component: './UserAccount/EnterpriseCertification', // 占位符组件
+      },
+      {
+        path: '/user-account/recharge-management',
+        name: 'rechargeManagement', // 充值管理
+        component: './UserAccount/RechargeManagement', // 占位符组件
       },
     ],
   },
   {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
+    path: '/consumption-details',
+    name: 'consumptionDetails', // 消费明细
+    icon: 'moneyCollect', // 假设图标
+    routes: [
+      {
+        path: '/consumption-details/price-management',
+        name: 'priceManagement', // 价格管理
+        component: './ConsumptionDetails/PriceManagement', // 占位符组件
+      },
+      {
+        path: '/consumption-details/consumption-statistics',
+        name: 'consumptionStatistics', // 消费统计
+        component: './ConsumptionDetails/ConsumptionStatistics', // 占位符组件
+      },
+    ],
+  },
+  {
+    path: '/query-data',
+    name: 'queryData', // 查询数据
+    icon: 'search', // 假设图标
+    routes: [
+      {
+        path: '/query-data/account-permission',
+        name: 'accountPermission', // 账号权限
+        component: './QueryData/AccountPermission', // 占位符组件
+      },
+    ],
+  },
+  {
+    path: '/data-service',
+    name: 'dataService', // 数据服务
+    icon: 'cloudServer', // 假设图标
+    routes: [
+      {
+        path: '/data-service/jike-data',
+        name: 'jikeData', // 及刻数据
+        component: './DataService/JikeData', // 占位符组件
+      },
+    ],
+  },
+  {
+    path: '/marketing-service',
+    name: 'marketingService', // 营销服务
+    icon: 'shop', // 假设图标
+    routes: [
+      {
+        path: '/marketing-service/borui-5g-message',
+        name: 'borui5GMessage', // 博瑞5G消息
+        component: './MarketingService/Borui5GMessage', // 占位符组件
+      },
+    ],
   },
   {
     path: '/',
-    redirect: '/welcome',
+    redirect: '/user-account/account-management', // 默认重定向到新的第一个菜单项
   },
   {
     path: '*',
