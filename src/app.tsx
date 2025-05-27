@@ -5,10 +5,21 @@ import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
 import { history, Link } from '@umijs/max';
+import { App, ConfigProvider } from 'antd'; // 导入 App 组件
 import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
+
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
+
+// 使用 ConfigProvider.config 配置 message 和 notification 的 holderRender
+ConfigProvider.config({
+  holderRender: (children) => (
+    <ConfigProvider>
+      <App>{children}</App>
+    </ConfigProvider>
+  ),
+});
 
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
