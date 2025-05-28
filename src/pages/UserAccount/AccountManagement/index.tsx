@@ -1,6 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import type { ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
+import { history, Outlet, useLocation } from '@umijs/max';
 import { Button, Space, Typography } from 'antd';
 import React from 'react';
 
@@ -43,6 +44,9 @@ const mockData: AccountItem[] = [
 ];
 
 const AccountManagement: React.FC = () => {
+  const location = useLocation();
+  const isAccountManagementPage = location.pathname === '/user-account/account-management';
+
   // 表格列定义
   const columns: ProColumns<AccountItem>[] = [
     {
@@ -131,9 +135,11 @@ const AccountManagement: React.FC = () => {
       title: '操作',
       key: 'actions',
       valueType: 'option',
-      render: () => (
+      render: (_, record) => (
         <Space>
-          <Link>编辑</Link>
+          <Link onClick={() => history.push(`/user-account/account-management/edit/${record.uid}`)}>
+            编辑
+          </Link>
           <Link>删除</Link>
         </Space>
       ),
@@ -188,37 +194,41 @@ const AccountManagement: React.FC = () => {
   };
 
   return (
-    <PageContainer>
-      {/* 表格和搜索 */}
-      <ProTable<
-        AccountItem,
-        {
-          role?: string;
-          searchKeyword?: string;
-          registrationTimeRange?: [string, string];
-          lastLoginTimeRange?: [string, string];
-        }
-      >
-        columns={columns}
-        request={requestData}
-        rowKey="uid"
-        search={{
-          labelWidth: 'auto',
-        }}
-        toolBarRender={() => [
-          <Button
-            type="primary"
-            key="primary"
-            icon={<PlusOutlined />}
-            onClick={() => {
-              console.log('新增账号');
-            }}
-          >
-            新增账号
-          </Button>,
-        ]}
-        options={false} // 关闭ProTable自带的工具栏，只保留搜索和分页
-      />
+    <PageContainer title={false}>
+      {isAccountManagementPage ? (
+        <ProTable<
+          AccountItem,
+          {
+            role?: string;
+            searchKeyword?: string;
+            registrationTimeRange?: [string, string];
+            lastLoginTimeRange?: [string, string];
+          }
+        >
+          columns={columns}
+          request={requestData}
+          rowKey="uid"
+          search={{
+            labelWidth: 'auto',
+          }}
+          toolBarRender={() => [
+            <Button
+              type="primary"
+              key="primary"
+              icon={<PlusOutlined />}
+              onClick={() => history.push('/user-account/account-management/add')}
+            >
+              新增账号
+            </Button>,
+          ]}
+          pagination={{
+            showSizeChanger: true,
+          }}
+          options={false} // 关闭ProTable自带的工具栏，只保留搜索和分页
+        />
+      ) : (
+        <Outlet />
+      )}
     </PageContainer>
   );
 };
