@@ -67,6 +67,14 @@ export default [
         path: '/user-account/enterprise-certification',
         name: '企业认证',
         component: './UserAccount/EnterpriseCertification',
+        routes: [
+          {
+            path: '/user-account/enterprise-certification/detail/:id',
+            name: '查看企业资料',
+            component: './UserAccount/EnterpriseCertification/Detail',
+            hideInMenu: true, // 在菜单中隐藏
+          },
+        ],
       },
       {
         path: '/user-account/recharge-management',
