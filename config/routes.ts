@@ -48,6 +48,20 @@ export default [
         path: '/user-account/role-management',
         name: '角色管理',
         component: './UserAccount/RoleManagement',
+        routes: [
+          {
+            path: '/user-account/role-management/add',
+            name: '新增角色',
+            component: './UserAccount/RoleManagement/RoleForm',
+            hideInMenu: true, // 在菜单中隐藏
+          },
+          {
+            path: '/user-account/role-management/edit/:id',
+            name: '编辑角色',
+            component: './UserAccount/RoleManagement/RoleForm',
+            hideInMenu: true, // 在菜单中隐藏
+          },
+        ],
       },
       {
         path: '/user-account/enterprise-certification',
