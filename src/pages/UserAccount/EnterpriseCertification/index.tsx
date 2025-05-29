@@ -1,33 +1,26 @@
+import {
+  approveEnterpriseCert,
+  queryEnterpriseCertifications,
+  rejectEnterpriseCert,
+} from '@/services/userAccount/enterpriseCertification';
+import type { ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { history, Outlet, request, useLocation } from '@umijs/max';
+import { history, Outlet, useLocation } from '@umijs/max';
 import { Button, Card, message, Popconfirm } from 'antd';
 import React, { useState } from 'react';
-
-// 定义数据类型
-interface EnterpriseItem {
-  uid: string;
-  phoneNumber: string;
-  userRole: string;
-  enterpriseName: string;
-  applicationTime: string;
-  status: 'pending' | 'approved' | 'rejected';
-}
 
 const EnterpriseCertification: React.FC = () => {
   const location = useLocation();
   const isEnterpriseCertificationPage =
     location.pathname === '/user-account/enterprise-certification';
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<EnterpriseItem[]>([]);
+  const [data, setData] = useState<API.EnterpriseItem[]>([]);
 
   // 模拟数据请求
   const fetchEnterpriseData = async () => {
     setLoading(true);
     try {
-      const response = await request('/api/enterpriseCertification', {
-        method: 'GET',
-        params: { status: 'pending' }, // 只请求待处理的
-      });
+      const response = await queryEnterpriseCertifications({ status: 'pending' }); // 只请求待处理的
       if (response.success) {
         setData(response.data);
       } else {
@@ -46,12 +39,9 @@ const EnterpriseCertification: React.FC = () => {
   }, []);
 
   // 处理通过操作
-  const handleApprove = async (record: EnterpriseItem) => {
+  const handleApprove = async (record: API.EnterpriseItem) => {
     try {
-      const response = await request('/api/enterpriseCertification/approve', {
-        method: 'POST',
-        data: { uid: record.uid },
-      });
+      const response = await approveEnterpriseCert({ uid: record.uid });
       if (response.success) {
         message.success(response.message);
         fetchEnterpriseData(); // 刷新列表
@@ -64,12 +54,9 @@ const EnterpriseCertification: React.FC = () => {
   };
 
   // 处理拒绝操作
-  const handleReject = async (record: EnterpriseItem) => {
+  const handleReject = async (record: API.EnterpriseItem) => {
     try {
-      const response = await request('/api/enterpriseCertification/reject', {
-        method: 'POST',
-        data: { uid: record.uid },
-      });
+      const response = await rejectEnterpriseCert({ uid: record.uid });
       if (response.success) {
         message.error(response.message); // 拒绝通常用error提示
         fetchEnterpriseData(); // 刷新列表
@@ -82,7 +69,7 @@ const EnterpriseCertification: React.FC = () => {
   };
 
   // 定义表格列
-  const columns = [
+  const columns: ProColumns<API.EnterpriseItem>[] = [
     {
       title: '账号UID',
       dataIndex: 'uid',
@@ -153,7 +140,7 @@ const EnterpriseCertification: React.FC = () => {
     <PageContainer title={false}>
       {isEnterpriseCertificationPage ? (
         <Card>
-          <ProTable<EnterpriseItem>
+          <ProTable<API.EnterpriseItem>
             columns={columns}
             dataSource={data}
             loading={loading}

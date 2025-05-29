@@ -1,3 +1,4 @@
+import { queryRechargeList } from '@/services/userAccount/recharge';
 import type { ProColumns } from '@ant-design/pro-components';
 import {
   ModalForm,
@@ -6,33 +7,20 @@ import {
   ProFormText,
   ProTable,
 } from '@ant-design/pro-components';
-import { request } from '@umijs/max';
 import { Button, Card, message, Space } from 'antd';
 import React, { useState } from 'react';
-
-// 定义数据类型
-interface RechargeItem {
-  uid: string;
-  phone: string;
-  role: string;
-  certificationStatus: string;
-  enterpriseName: string;
-  accountBalance: string;
-  registrationTime: string;
-  lastLoginTime: string;
-}
 
 const RechargeManagement: React.FC = () => {
   // 当前充值的账号UID
   const [currentRechargeUid, setCurrentRechargeUid] = useState<string | undefined>(undefined);
 
   // 处理充值按钮点击
-  const handleRechargeClick = (record: RechargeItem) => {
+  const handleRechargeClick = (record: API.RechargeItem) => {
     setCurrentRechargeUid(record.uid);
   };
 
   // 表格列定义
-  const columns: ProColumns<RechargeItem>[] = [
+  const columns: ProColumns<API.RechargeItem>[] = [
     {
       title: '角色',
       dataIndex: 'role',
@@ -120,13 +108,10 @@ const RechargeManagement: React.FC = () => {
   // 数据请求
   const requestData = async (params: any, sort: any, filter: any) => {
     console.log('请求参数:', params, sort, filter);
-    const response = await request('/api/recharge', {
-      method: 'GET',
-      params: {
-        ...params,
-        ...sort,
-        ...filter,
-      },
+    const response = await queryRechargeList({
+      ...params,
+      ...sort,
+      ...filter,
     });
     return {
       data: response.data,
@@ -139,7 +124,7 @@ const RechargeManagement: React.FC = () => {
     <PageContainer title={false}>
       <Card>
         <ProTable<
-          RechargeItem,
+          API.RechargeItem,
           {
             role?: string;
             searchKeyword?: string;

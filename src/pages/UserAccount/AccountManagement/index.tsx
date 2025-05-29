@@ -1,30 +1,19 @@
+import { queryAccountList } from '@/services/userAccount/account';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { history, Outlet, request, useLocation } from '@umijs/max';
+import { history, Outlet, useLocation } from '@umijs/max';
 import { Button, Space, Typography } from 'antd';
 import React from 'react';
 
 const { Link } = Typography;
-
-// 定义数据类型
-interface AccountItem {
-  uid: string;
-  phone: string;
-  role: string;
-  certificationStatus: string;
-  enterpriseName: string;
-  accountBalance: string;
-  registrationTime: string;
-  lastLoginTime: string;
-}
 
 const AccountManagement: React.FC = () => {
   const location = useLocation();
   const isAccountManagementPage = location.pathname === '/user-account/account-management';
 
   // 表格列定义
-  const columns: ProColumns<AccountItem>[] = [
+  const columns: ProColumns<API.AccountItem>[] = [
     {
       title: '角色',
       dataIndex: 'role',
@@ -125,14 +114,11 @@ const AccountManagement: React.FC = () => {
   // 数据请求
   const requestData = async (params: any, sort: any, filter: any) => {
     console.log('请求参数:', params, sort, filter);
-    const response = await request('/api/account', {
-      method: 'GET',
-      params: {
-        ...params,
-        // 将 sort 和 filter 参数传递给后端
-        ...sort,
-        ...filter,
-      },
+    const response = await queryAccountList({
+      ...params,
+      // 将 sort 和 filter 参数传递给后端
+      ...sort,
+      ...filter,
     });
     return {
       data: response.data,
@@ -145,7 +131,7 @@ const AccountManagement: React.FC = () => {
     <PageContainer title={false}>
       {isAccountManagementPage ? (
         <ProTable<
-          AccountItem,
+          API.AccountItem,
           {
             role?: string;
             searchKeyword?: string;

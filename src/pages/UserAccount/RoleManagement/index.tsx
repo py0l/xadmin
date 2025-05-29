@@ -1,26 +1,19 @@
+import { queryRoleList } from '@/services/userAccount/role';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { history, Outlet, request, useLocation } from '@umijs/max';
+import { history, Outlet, useLocation } from '@umijs/max';
 import { Button, Space, Typography } from 'antd';
 import React from 'react';
 
 const { Link } = Typography;
-
-// 定义数据类型
-interface RoleItem {
-  roleId: string;
-  userRole: string;
-  enabledModules: string;
-  creationTime: string;
-}
 
 const RoleManagement: React.FC = () => {
   const location = useLocation();
   const isRoleManagementPage = location.pathname === '/user-account/role-management';
 
   // 表格列定义
-  const columns: ProColumns<RoleItem>[] = [
+  const columns: ProColumns<API.RoleItem>[] = [
     {
       title: '查询',
       dataIndex: 'searchKeyword',
@@ -77,13 +70,10 @@ const RoleManagement: React.FC = () => {
   // 数据请求
   const requestData = async (params: any, sort: any, filter: any) => {
     console.log('请求参数:', params, sort, filter);
-    const response = await request('/api/role', {
-      method: 'GET',
-      params: {
-        ...params,
-        ...sort,
-        ...filter,
-      },
+    const response = await queryRoleList({
+      ...params,
+      ...sort,
+      ...filter,
     });
     return {
       data: response.data,
@@ -96,7 +86,7 @@ const RoleManagement: React.FC = () => {
     <PageContainer title={false}>
       {isRoleManagementPage ? (
         <ProTable<
-          RoleItem,
+          API.RoleItem,
           {
             searchKeyword?: string;
             creationTimeRange?: [string, string];

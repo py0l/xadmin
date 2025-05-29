@@ -76,4 +76,49 @@ declare namespace API {
     /** 业务上的请求是否成功 */
     success?: boolean;
   };
+
+  type Response<T> = {
+    data: T;
+    success: boolean;
+    total?: number;
+    message?: string; // 添加 message 属性
+  };
+
+  type AccountItem = {
+    uid: string;
+    phone: string;
+    role: string;
+    certificationStatus: string;
+    enterpriseName: string;
+    accountBalance: string;
+    registrationTime: string;
+    lastLoginTime: string;
+  };
+
+  type RechargeItem = {
+    uid: string;
+    phone: string;
+    role: string;
+    certificationStatus: string;
+    enterpriseName: string;
+    accountBalance: string;
+    registrationTime: string;
+    lastLoginTime: string;
+  };
+
+  type EnterpriseItem = {
+    uid: string;
+    phoneNumber: string;
+    userRole: string;
+    enterpriseName: string;
+    applicationTime: string;
+    status: 'pending' | 'approved' | 'rejected';
+  };
+
+  type RoleItem = {
+    roleId: string;
+    userRole: string;
+    enabledModules: string;
+    creationTime: string;
+  };
 }
