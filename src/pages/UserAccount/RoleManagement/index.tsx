@@ -1,7 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import type { ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { history, Outlet, useLocation } from '@umijs/max';
+import { history, Outlet, request, useLocation } from '@umijs/max';
 import { Button, Space, Typography } from 'antd';
 import React from 'react';
 
@@ -14,34 +14,6 @@ interface RoleItem {
   enabledModules: string;
   creationTime: string;
 }
-
-// 模拟数据
-const mockData: RoleItem[] = [
-  {
-    roleId: 'js004',
-    userRole: '普通客户',
-    enabledModules: '首页, 查询数据, 数据地图',
-    creationTime: '2024-08-18 17:35',
-  },
-  {
-    roleId: 'js003',
-    userRole: '代理商',
-    enabledModules: '首页, 查询数据, 城市热力',
-    creationTime: '2024-08-18 17:35',
-  },
-  {
-    roleId: 'js002',
-    userRole: '运营人员',
-    enabledModules: '首页, 消费明细, 数据服务',
-    creationTime: '2024-08-18 17:35',
-  },
-  {
-    roleId: 'js001',
-    userRole: '管理员',
-    enabledModules: '所有模块',
-    creationTime: '2024-08-18 17:35',
-  },
-];
 
 const RoleManagement: React.FC = () => {
   const location = useLocation();
@@ -102,36 +74,21 @@ const RoleManagement: React.FC = () => {
     },
   ];
 
-  // 模拟数据请求
+  // 数据请求
   const requestData = async (params: any, sort: any, filter: any) => {
     console.log('请求参数:', params, sort, filter);
-
-    let filteredData = mockData.filter((item) => {
-      // 关键词搜索
-      if (params.searchKeyword) {
-        const keyword = params.searchKeyword.toLowerCase();
-        if (!item.userRole.toLowerCase().includes(keyword)) {
-          return false;
-        }
-      }
-      // 创建时间范围筛选 (这里需要更复杂的日期比较逻辑)
-      // if (params.creationTimeRange && params.creationTimeRange.length === 2) {
-      //   const [start, end] = params.creationTimeRange;
-      //   // 实际应用中需要将 item.creationTime 转换为日期对象进行比较
-      // }
-      return true;
+    const response = await request('/api/role', {
+      method: 'GET',
+      params: {
+        ...params,
+        ...sort,
+        ...filter,
+      },
     });
-
-    // 模拟分页
-    const { current = 1, pageSize = 10 } = params;
-    const startIndex = (current - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
-    const paginatedData = filteredData.slice(startIndex, endIndex);
-
     return {
-      data: paginatedData,
-      success: true,
-      total: filteredData.length,
+      data: response.data,
+      success: response.success,
+      total: response.total,
     };
   };
 

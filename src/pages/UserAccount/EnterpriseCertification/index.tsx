@@ -1,52 +1,84 @@
 import { PageContainer, ProTable } from '@ant-design/pro-components';
+import { history, Outlet, request, useLocation } from '@umijs/max';
 import { Button, Card, message, Popconfirm } from 'antd';
 import React, { useState } from 'react';
-import { history, Outlet, useLocation } from 'umi'; // 确保导入 Outlet 和 useLocation
 
-// 模拟数据
-const mockEnterpriseList = [
-  {
-    uid: 'jk0092',
-    phoneNumber: '13800138002',
-    userRole: '普通客户',
-    enterpriseName: '深圳创鑫技术有限公司',
-    applicationTime: '2024-08-18 17:35',
-    status: 'pending', // pending, approved, rejected
-  },
-  {
-    uid: 'jk0091',
-    phoneNumber: '13800138001',
-    userRole: '普通客户',
-    enterpriseName: '深圳赛格股份有限公司',
-    applicationTime: '2024-08-15 17:35',
-    status: 'pending',
-  },
-  {
-    uid: 'jk0090',
-    phoneNumber: '13800138000',
-    userRole: '普通客户',
-    enterpriseName: '广州市天河软件园有限公司',
-    applicationTime: '2024-08-14 10:00',
-    status: 'approved',
-  },
-];
+// 定义数据类型
+interface EnterpriseItem {
+  uid: string;
+  phoneNumber: string;
+  userRole: string;
+  enterpriseName: string;
+  applicationTime: string;
+  status: 'pending' | 'approved' | 'rejected';
+}
 
 const EnterpriseCertification: React.FC = () => {
   const location = useLocation();
   const isEnterpriseCertificationPage =
     location.pathname === '/user-account/enterprise-certification';
-  const [dataSource, setDataSource] = useState(mockEnterpriseList);
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<EnterpriseItem[]>([]);
+
+  // 模拟数据请求
+  const fetchEnterpriseData = async () => {
+    setLoading(true);
+    try {
+      const response = await request('/api/enterpriseCertification', {
+        method: 'GET',
+        params: { status: 'pending' }, // 只请求待处理的
+      });
+      if (response.success) {
+        setData(response.data);
+      } else {
+        message.error('获取企业认证列表失败');
+      }
+    } catch (error) {
+      message.error('获取企业认证列表异常');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 首次加载和操作后刷新数据
+  React.useEffect(() => {
+    fetchEnterpriseData();
+  }, []);
 
   // 处理通过操作
-  const handleApprove = (record: any) => {
-    message.success(`已通过 ${record.enterpriseName} 的企业认证`);
-    setDataSource(dataSource.filter((item) => item.uid !== record.uid));
+  const handleApprove = async (record: EnterpriseItem) => {
+    try {
+      const response = await request('/api/enterpriseCertification/approve', {
+        method: 'POST',
+        data: { uid: record.uid },
+      });
+      if (response.success) {
+        message.success(response.message);
+        fetchEnterpriseData(); // 刷新列表
+      } else {
+        message.error(response.message);
+      }
+    } catch (error) {
+      message.error('通过操作异常');
+    }
   };
 
   // 处理拒绝操作
-  const handleReject = (record: any) => {
-    message.error(`已拒绝 ${record.enterpriseName} 的企业认证`);
-    setDataSource(dataSource.filter((item) => item.uid !== record.uid));
+  const handleReject = async (record: EnterpriseItem) => {
+    try {
+      const response = await request('/api/enterpriseCertification/reject', {
+        method: 'POST',
+        data: { uid: record.uid },
+      });
+      if (response.success) {
+        message.error(response.message); // 拒绝通常用error提示
+        fetchEnterpriseData(); // 刷新列表
+      } else {
+        message.error(response.message);
+      }
+    } catch (error) {
+      message.error('拒绝操作异常');
+    }
   };
 
   // 定义表格列
@@ -121,9 +153,10 @@ const EnterpriseCertification: React.FC = () => {
     <PageContainer title={false}>
       {isEnterpriseCertificationPage ? (
         <Card>
-          <ProTable
+          <ProTable<EnterpriseItem>
             columns={columns}
-            dataSource={dataSource.filter((item) => item.status === 'pending')} // 只显示待处理的
+            dataSource={data}
+            loading={loading}
             rowKey="uid"
             search={false}
             options={false}

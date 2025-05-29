@@ -6,6 +6,7 @@ import {
   ProFormText,
   ProTable,
 } from '@ant-design/pro-components';
+import { request } from '@umijs/max';
 import { Button, Card, message, Space } from 'antd';
 import React, { useState } from 'react';
 
@@ -20,30 +21,6 @@ interface RechargeItem {
   registrationTime: string;
   lastLoginTime: string;
 }
-
-// 模拟数据
-const mockRechargeData: RechargeItem[] = [
-  {
-    uid: 'jk0092',
-    phone: '13800138002',
-    role: '普通客户',
-    certificationStatus: '未认证',
-    enterpriseName: '',
-    accountBalance: '30000.00',
-    registrationTime: '2024-08-08 15:35',
-    lastLoginTime: '2024-08-18 17:35',
-  },
-  {
-    uid: 'jk0091',
-    phone: '13800138001',
-    role: '普通客户',
-    certificationStatus: '已认证',
-    enterpriseName: '深圳赛格股份有限公司',
-    accountBalance: '30000.00',
-    registrationTime: '2024-08-08 15:35',
-    lastLoginTime: '2024-08-18 17:35',
-  },
-];
 
 const RechargeManagement: React.FC = () => {
   // 当前充值的账号UID
@@ -140,50 +117,21 @@ const RechargeManagement: React.FC = () => {
     },
   ];
 
-  // 模拟数据请求
+  // 数据请求
   const requestData = async (params: any, sort: any, filter: any) => {
     console.log('请求参数:', params, sort, filter);
-
-    // 模拟筛选逻辑
-    let filteredData = mockRechargeData.filter((item) => {
-      // 角色筛选
-      if (params.role && params.role !== 'all' && item.role !== params.role) {
-        return false;
-      }
-      // 关键词搜索
-      if (params.searchKeyword) {
-        const keyword = params.searchKeyword.toLowerCase();
-        if (
-          !item.uid.toLowerCase().includes(keyword) &&
-          !item.phone.toLowerCase().includes(keyword) &&
-          !item.enterpriseName.toLowerCase().includes(keyword)
-        ) {
-          return false;
-        }
-      }
-      // 注册时间范围筛选 (这里需要更复杂的日期比较逻辑)
-      // if (params.registrationTimeRange && params.registrationTimeRange.length === 2) {
-      //   const [start, end] = params.registrationTimeRange;
-      //   // 实际应用中需要将 item.registrationTime 转换为日期对象进行比较
-      // }
-      // 最后登录时间范围筛选
-      // if (params.lastLoginTimeRange && params.lastLoginTimeRange.length === 2) {
-      //   const [start, end] = params.lastLoginTimeRange;
-      //   // 实际应用中需要将 item.lastLoginTime 转换为日期对象进行比较
-      // }
-      return true;
+    const response = await request('/api/recharge', {
+      method: 'GET',
+      params: {
+        ...params,
+        ...sort,
+        ...filter,
+      },
     });
-
-    // 模拟分页
-    const { current = 1, pageSize = 10 } = params;
-    const startIndex = (current - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
-    const paginatedData = filteredData.slice(startIndex, endIndex);
-
     return {
-      data: paginatedData,
-      success: true,
-      total: filteredData.length,
+      data: response.data,
+      success: response.success,
+      total: response.total,
     };
   };
 
