@@ -147,7 +147,9 @@ const EnterpriseCertification: React.FC = () => {
             rowKey="uid"
             search={false}
             options={false}
-            pagination={false}
+            pagination={{
+              showSizeChanger: true,
+            }}
             headerTitle="企业认证列表"
           />
         </Card>
