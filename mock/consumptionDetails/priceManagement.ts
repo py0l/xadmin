@@ -1,4 +1,3 @@
-// mock/consumptionDetails/priceManagement.ts
 import Mock from 'mockjs';
 import moment from 'moment'; // 导入 moment 用于日期处理
 
@@ -30,6 +29,14 @@ const getPriceManagementList = (req: any, res: any) => {
         },
         registrationTime: () => Mock.Random.datetime('yyyy-MM-dd HH:mm:ss'), // 随机生成注册时间
         lastLoginTime: () => Mock.Random.datetime('yyyy-MM-dd HH:mm:ss'), // 随机生成最后登录时间
+        dataServices: [
+          { name: '及刻数据 泛数据', price: 0.2, unit: '元/条' },
+          { name: '及刻数据 精准数据', price: 1.0, unit: '元/条' },
+        ],
+        marketingServices: [
+          { name: '富信 5G消息', price: 0.5, unit: '元/条' },
+          { name: '富信 文本短信', price: 0.05, unit: '元/条' },
+        ],
       },
     ],
   }).data;
@@ -89,6 +96,48 @@ const getPriceManagementList = (req: any, res: any) => {
   });
 };
 
+// 获取价格详情的 mock 数据逻辑
+const getPriceDetails = (req: any, res: any) => {
+  const { accountUID } = req.params; // 从 URL 参数中获取 accountUID
+
+  // 模拟从数据库获取数据
+  const mockDetail = Mock.mock({
+    accountUID: accountUID,
+    phoneNumber: /^1[3-9]\d{9}$/,
+    enterpriseName: Mock.Random.csentence(5, 10) + '有限公司',
+    'userRole|1': ['普通客户', '企业客户'],
+    dataServices: {
+      generalDataPrice: () => Mock.Random.float(0.1, 10, 2, 2),
+      accurateDataPrice: () => Mock.Random.float(0.5, 20, 2, 2),
+    },
+    marketingServices: {
+      fiveGMessagePrice: () => Mock.Random.float(0.01, 1, 2, 2),
+      textMessagePrice: () => Mock.Random.float(0.01, 0.5, 2, 2),
+    },
+  });
+
+  res.send({
+    data: mockDetail,
+    success: true,
+    message: '获取价格详情成功',
+  });
+};
+
+// 更新价格详情的 mock 数据逻辑
+const updatePriceDetails = (req: any, res: any) => {
+  const { accountUID, dataServices, marketingServices } = req.body; // 获取请求体中的数据
+
+  // 在这里可以模拟数据更新的逻辑，例如保存到内存中的某个变量
+  console.log('更新价格详情:', { accountUID, dataServices, marketingServices });
+
+  res.send({
+    success: true,
+    message: '价格更新成功',
+  });
+};
+
 export default {
   'GET /api/priceManagement/list': getPriceManagementList,
+  'GET /api/priceManagement/details/:accountUID': getPriceDetails,
+  'POST /api/priceManagement/update': updatePriceDetails,
 };

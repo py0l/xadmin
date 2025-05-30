@@ -144,4 +144,31 @@ declare namespace API {
     registrationTime?: string[];
     lastLoginTime?: string[];
   };
+
+  type PriceDetails = {
+    accountUID: string;
+    phoneNumber: string;
+    enterpriseName: string;
+    userRole: string;
+    dataServices: {
+      generalDataPrice: number;
+      accurateDataPrice: number;
+    };
+    marketingServices: {
+      fiveGMessagePrice: number;
+      textMessagePrice: number;
+    };
+  };
+
+  type PriceUpdateParams = {
+    accountUID: string;
+    dataServices: {
+      generalDataPrice: number;
+      accurateDataPrice: number;
+    };
+    marketingServices: {
+      fiveGMessagePrice: number;
+      textMessagePrice: number;
+    };
+  };
 }

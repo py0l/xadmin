@@ -94,6 +94,12 @@ export default [
         component: './ConsumptionDetails/PriceManagement',
       },
       {
+        path: '/consumption-details/price-management/set-price/:accountUID',
+        name: '设置价格',
+        component: './ConsumptionDetails/PriceManagement/SetPrice',
+        hideInMenu: true, // 在菜单中隐藏
+      },
+      {
         path: '/consumption-details/consumption-statistics',
         name: '消费统计',
         component: './ConsumptionDetails/ConsumptionStatistics',
