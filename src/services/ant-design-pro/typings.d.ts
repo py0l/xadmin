@@ -121,4 +121,27 @@ declare namespace API {
     enabledModules: string;
     creationTime: string;
   };
+
+  type PriceManagementItem = {
+    accountUID: string;
+    phoneNumber: string;
+    userRole: string;
+    certificationStatus: string;
+    enterpriseName: string;
+  };
+
+  type PriceManagementList = {
+    data?: PriceManagementItem[];
+    total?: number;
+    success?: boolean;
+  };
+
+  type PriceManagementListParams = {
+    current?: number;
+    pageSize?: number;
+    userRole?: string;
+    searchKeyword?: string;
+    registrationTime?: string[];
+    lastLoginTime?: string[];
+  };
 }

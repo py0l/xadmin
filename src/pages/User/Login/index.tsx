@@ -131,6 +131,8 @@ const Login: React.FC = () => {
           subTitle={'Ant Design 是西湖区最具影响力的 Web 设计规范'}
           initialValues={{
             autoLogin: true,
+            username: 'admin',
+            password: 'ant.design',
           }}
           actions={['其他登录方式 :', <ActionIcons key="icons" />]}
           onFinish={async (values) => {
