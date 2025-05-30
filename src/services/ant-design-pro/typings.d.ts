@@ -171,4 +171,21 @@ declare namespace API {
       textMessagePrice: number;
     };
   };
+
+  type ConsumptionStatisticsItem = {
+    id: string;
+    transactionTime: string;
+    account: string;
+    incomeExpenseType: string;
+    transactionType: string;
+    amount: number;
+    itemName: string;
+    balance: number;
+  };
+
+  type ConsumptionStatisticsList = {
+    data?: ConsumptionStatisticsItem[];
+    total?: number;
+    success?: boolean;
+  };
 }
