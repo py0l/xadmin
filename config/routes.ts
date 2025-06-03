@@ -123,7 +123,41 @@ export default [
     name: '数据服务',
     icon: 'cloudServer',
     routes: [
-      { path: '/data-service/jike-data', name: '及刻数据', component: './DataService/JikeData' },
+      {
+        path: '/data-service/jike-data',
+        name: '及刻数据',
+        component: './DataService/JikeData',
+        routes: [
+          {
+            path: '/data-service/jike-data',
+            redirect: '/data-service/jike-data/account-review',
+          },
+          {
+            path: '/data-service/jike-data/account-review',
+            name: '开户审核',
+            component: './DataService/JikeData/AccountReview',
+            hideInMenu: true, // 在菜单中隐藏
+          },
+          {
+            path: '/data-service/jike-data/account-review/detail/:accountId',
+            name: '查看开户资料',
+            component: './DataService/JikeData/AccountReview/Detail',
+            hideInMenu: true, // 在菜单中隐藏
+          },
+          {
+            path: '/data-service/jike-data/create-crowd-package',
+            name: '创建人群包',
+            component: './DataService/JikeData/CreateCrowdPackage',
+            hideInMenu: true, // 在菜单中隐藏
+          },
+          {
+            path: '/data-service/jike-data/crowd-package-record',
+            name: '人群包记录',
+            component: './DataService/JikeData/CrowdPackageRecord',
+            hideInMenu: true, // 在菜单中隐藏
+          },
+        ],
+      },
     ],
   },
   {
