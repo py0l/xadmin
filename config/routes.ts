@@ -106,18 +106,18 @@ export default [
       },
     ],
   },
-  {
-    path: '/query-data',
-    name: '查询数据',
-    icon: 'search',
-    routes: [
-      {
-        path: '/query-data/account-permission',
-        name: '账号权限',
-        component: './QueryData/AccountPermission',
-      },
-    ],
-  },
+  // {
+  //   path: '/query-data',
+  //   name: '查询数据',
+  //   icon: 'search',
+  //   routes: [
+  //     {
+  //       path: '/query-data/account-permission',
+  //       name: '账号权限',
+  //       component: './QueryData/AccountPermission',
+  //     },
+  //   ],
+  // },
   {
     path: '/data-service',
     name: '数据服务',
