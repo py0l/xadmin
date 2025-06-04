@@ -1,5 +1,7 @@
+import { ArrowLeftOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
 import { history, Outlet, useLocation } from '@umijs/max';
+import { Button } from 'antd';
 import React from 'react';
 
 const Borui5GMessage: React.FC = () => {
@@ -37,8 +39,11 @@ const Borui5GMessage: React.FC = () => {
     },
   ];
 
-  // 定义不需要显示面包屑的路径白名单
+  // 定义不需要显示面包屑的路径白名单 (即Tab路由页面)
   const noBreadcrumbPaths = tabList.map((item) => item.key);
+
+  // 判断是否为Tab路由页面
+  const isTabRoute = noBreadcrumbPaths.includes(location.pathname);
 
   // 处理 Tab 切换
   const onTabChange = (key: string) => {
@@ -48,11 +53,25 @@ const Borui5GMessage: React.FC = () => {
   return (
     <PageContainer
       title={false}
-      // 如果是白名单中的路径，则不显示面包屑
-      breadcrumbRender={noBreadcrumbPaths.includes(location.pathname) ? false : undefined}
-      tabList={tabList}
+      // 如果是白名单中的路径（Tab路由页面），则不显示面包屑，否则显示面包屑
+      breadcrumbRender={isTabRoute ? false : undefined}
+      // 如果是Tab路由页面，则显示tab栏，否则不显示
+      tabList={isTabRoute ? tabList : undefined}
       tabActiveKey={location.pathname}
       onTabChange={onTabChange}
+      extra={
+        isTabRoute ? undefined : ( // 如果不是Tab路由页面，则显示返回按钮
+          <Button
+            type="default"
+            icon={<ArrowLeftOutlined />}
+            onClick={() => {
+              history.back();
+            }}
+          >
+            返回
+          </Button>
+        )
+      }
       header={{
         style: {
           display: 'flex',
