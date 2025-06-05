@@ -19,3 +19,10 @@ export async function getChatbotList(
     ...(options || {}),
   });
 }
+
+export async function getChatbotDetail(chatbotId: string, options?: { [key: string]: any }) {
+  return request(`/api/chatbot/detail/${chatbotId}`, {
+    method: 'GET',
+    ...(options || {}),
+  });
+}

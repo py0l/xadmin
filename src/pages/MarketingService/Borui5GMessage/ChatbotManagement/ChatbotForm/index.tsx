@@ -1,3 +1,4 @@
+import { getChatbotDetail } from '@/services/chatbot'; // 导入新的接口
 import { UploadOutlined } from '@ant-design/icons';
 import {
   ProForm,
@@ -8,11 +9,34 @@ import {
   ProFormTextArea,
   ProFormUploadButton,
 } from '@ant-design/pro-components';
-import { history } from '@umijs/max';
+import { history, useParams } from '@umijs/max'; // 导入 useParams
 import { Card, Col, message, Row, Typography } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react'; // 导入 useEffect
 
-const CreateChatbot: React.FC = () => {
+const ChatbotForm: React.FC = () => {
+  const params = useParams();
+  const isEditMode = !!params.chatbotId; // 判断是否为修改模式
+  const [form] = ProForm.useForm(); // 获取 form 实例
+
+  useEffect(() => {
+    if (isEditMode && params.chatbotId) {
+      const fetchChatbotDetail = async () => {
+        try {
+          const result = await getChatbotDetail(params.chatbotId as string);
+          if (result.success) {
+            form.setFieldsValue(result.data); // 回填数据
+          } else {
+            message.error('获取Chatbot详情失败');
+          }
+        } catch (error) {
+          message.error('获取Chatbot详情异常');
+          console.error(error);
+        }
+      };
+      fetchChatbotDetail();
+    }
+  }, [isEditMode, params.chatbotId, form]); // 依赖项
+
   const onFinish = async (values: Record<string, any>) => {
     console.log('表单提交值:', values);
     message.success('提交成功');
@@ -21,13 +45,14 @@ const CreateChatbot: React.FC = () => {
 
   return (
     <ProForm
+      form={form}
       onFinish={onFinish}
       layout="horizontal"
       labelCol={{ span: 4 }}
       wrapperCol={{ span: 10 }}
       submitter={{
         searchConfig: {
-          submitText: '申请开通',
+          submitText: isEditMode ? '保存' : '申请开通', // 根据是否为编辑模式调整提交按钮文本
           resetText: '取消',
         },
         onReset() {
@@ -56,23 +81,29 @@ const CreateChatbot: React.FC = () => {
           fieldProps={{
             suffixIcon: <Typography.Link>为指定用户账号，创建Chatbot</Typography.Link>,
           }}
+          readonly={isEditMode} // 在编辑模式下只读
         />
-        <ProFormSwitch name="userAuth" label="需用户授权" />
-        <ProFormDependency name={['userAuth', 'countdown']}>
-          {({ userAuth, countdown }) => {
-            if (!userAuth) {
-              return null;
-            }
-            return (
-              <ProFormSwitch
-                name="countdown"
-                label="倒计时"
-                extra={countdown ? '24小时后，自动授权' : undefined}
-                initialValue={false}
-              />
-            );
-          }}
-        </ProFormDependency>
+        {!isEditMode && ( // 仅在非修改模式下渲染
+          <>
+            <ProFormSwitch name="userAuth" label="需用户授权" readonly={isEditMode} />
+            <ProFormDependency name={['userAuth', 'countdown']}>
+              {({ userAuth, countdown }) => {
+                if (!userAuth) {
+                  return null;
+                }
+                return (
+                  <ProFormSwitch
+                    name="countdown"
+                    label="倒计时"
+                    extra={countdown ? '24小时后，自动授权' : undefined}
+                    initialValue={false}
+                    readonly={isEditMode}
+                  />
+                );
+              }}
+            </ProFormDependency>
+          </>
+        )}
       </Card>
 
       <Card title="填写企业信息" variant="borderless" style={{ marginBottom: 24 }}>
@@ -80,11 +111,13 @@ const CreateChatbot: React.FC = () => {
           name="enterpriseName"
           label="企业名称"
           rules={[{ required: true, message: '请输入企业名称' }]}
+          readonly={isEditMode} // 在编辑模式下只读
         />
         <ProFormTextArea
           name="enterpriseIntro"
           label="企业介绍"
           rules={[{ required: true, message: '请输入企业介绍' }]}
+          readonly={isEditMode} // 在编辑模式下只读
         />
         <Row gutter={16}>
           <Col span={12}>
@@ -100,6 +133,7 @@ const CreateChatbot: React.FC = () => {
               rules={[{ required: true, message: '请上传企业营业执照' }]}
               extra="支持 jpg .jpeg .png 格式"
               icon={<UploadOutlined />}
+              disabled={isEditMode} // 在编辑模式下禁用
             />
           </Col>
           <Col span={12}>
@@ -115,6 +149,7 @@ const CreateChatbot: React.FC = () => {
               rules={[{ required: true, message: '请上传企业LOGO' }]}
               extra="支持 jpg .jpeg .png 格式"
               icon={<UploadOutlined />}
+              disabled={isEditMode} // 在编辑模式下禁用
             />
           </Col>
         </Row>
@@ -125,16 +160,19 @@ const CreateChatbot: React.FC = () => {
             industry1: '工程和技术研究和试验发展(M7320)',
           }}
           rules={[{ required: true, message: '请选择企业所属行业' }]}
+          readonly={isEditMode} // 在编辑模式下只读
         />
         <ProFormText
           name="socialCreditCode"
           label="统一社会信用代码"
           rules={[{ required: true, message: '请输入统一社会信用代码' }]}
+          readonly={isEditMode} // 在编辑模式下只读
         />
         <ProFormText
           name="registeredAddress"
           label="企业注册地址"
           rules={[{ required: true, message: '请输入企业注册地址' }]}
+          readonly={isEditMode} // 在编辑模式下只读
         />
         <ProFormText
           name="contactPhone"
@@ -143,11 +181,13 @@ const CreateChatbot: React.FC = () => {
             { required: true, message: '请输入企业联系电话' },
             { pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号码格式' },
           ]}
+          readonly={isEditMode} // 在编辑模式下只读
         />
         <ProFormText
           name="legalPersonName"
           label="法定代表人姓名"
           rules={[{ required: true, message: '请输入法定代表人姓名' }]}
+          readonly={isEditMode} // 在编辑模式下只读
         />
         <ProFormText
           name="legalPersonId"
@@ -159,6 +199,7 @@ const CreateChatbot: React.FC = () => {
               message: '请输入正确的身份证号格式',
             },
           ]}
+          readonly={isEditMode} // 在编辑模式下只读
         />
         <Row gutter={16}>
           <Col span={12}>
@@ -174,6 +215,7 @@ const CreateChatbot: React.FC = () => {
               rules={[{ required: true, message: '请上传法人身份证像面' }]}
               extra="支持 jpg .jpeg .png 格式"
               icon={<UploadOutlined />}
+              disabled={isEditMode} // 在编辑模式下禁用
             />
           </Col>
           <Col span={12}>
@@ -189,6 +231,7 @@ const CreateChatbot: React.FC = () => {
               rules={[{ required: true, message: '请上传法人身份证国徽面' }]}
               extra="支持 jpg .jpeg .png 格式"
               icon={<UploadOutlined />}
+              disabled={isEditMode} // 在编辑模式下禁用
             />
           </Col>
         </Row>
@@ -199,6 +242,7 @@ const CreateChatbot: React.FC = () => {
           name="contactPersonName"
           label="联系人姓名"
           rules={[{ required: true, message: '请输入联系人姓名' }]}
+          readonly={isEditMode} // 在编辑模式下只读
         />
         <ProFormText
           name="contactPersonId"
@@ -210,6 +254,7 @@ const CreateChatbot: React.FC = () => {
               message: '请输入正确的身份证号格式',
             },
           ]}
+          readonly={isEditMode} // 在编辑模式下只读
         />
         <Row gutter={16}>
           <Col span={12}>
@@ -225,6 +270,7 @@ const CreateChatbot: React.FC = () => {
               rules={[{ required: true, message: '请上传联系人身份证像面' }]}
               extra="支持 jpg .jpeg .png 格式"
               icon={<UploadOutlined />}
+              disabled={isEditMode} // 在编辑模式下禁用
             />
           </Col>
           <Col span={12}>
@@ -240,6 +286,7 @@ const CreateChatbot: React.FC = () => {
               rules={[{ required: true, message: '请上传联系人身份证国徽面' }]}
               extra="支持 jpg .jpeg .png 格式"
               icon={<UploadOutlined />}
+              disabled={isEditMode} // 在编辑模式下禁用
             />
           </Col>
         </Row>
@@ -250,6 +297,7 @@ const CreateChatbot: React.FC = () => {
             { required: true, message: '请输入联系人手机号' },
             { pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号码格式' },
           ]}
+          readonly={isEditMode} // 在编辑模式下只读
         />
         <ProFormText
           name="contactPersonEmail"
@@ -258,6 +306,7 @@ const CreateChatbot: React.FC = () => {
             { required: true, message: '请输入联系人邮箱' },
             { type: 'email', message: '请输入正确的邮箱格式' },
           ]}
+          readonly={isEditMode} // 在编辑模式下只读
         />
         <ProFormUploadButton
           name="customerAuthDoc"
@@ -269,6 +318,7 @@ const CreateChatbot: React.FC = () => {
           rules={[{ required: true, message: '请上传客户授权书文件' }]}
           extra="支持 .pdf 格式"
           icon={<UploadOutlined />}
+          disabled={isEditMode} // 在编辑模式下禁用
         />
         <ProFormUploadButton
           name="supplementaryQualification"
@@ -279,6 +329,7 @@ const CreateChatbot: React.FC = () => {
           }}
           extra="支持 jpg .jpeg .png .pdf 格式"
           icon={<UploadOutlined />}
+          disabled={isEditMode} // 在编辑模式下禁用
         />
       </Card>
 
@@ -388,4 +439,4 @@ const CreateChatbot: React.FC = () => {
   );
 };
 
-export default CreateChatbot;
+export default ChatbotForm;

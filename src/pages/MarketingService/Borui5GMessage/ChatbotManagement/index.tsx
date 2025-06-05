@@ -111,7 +111,15 @@ const ChatbotManagement: React.FC = () => {
               <Typography.Link>拒绝</Typography.Link>
             </>
           )}
-          <Typography.Link>修改</Typography.Link>
+          <Typography.Link
+            onClick={() =>
+              history.push(
+                `/marketing-service/borui-5g-message/chatbot-management/edit/${record.chatbotId}`,
+              )
+            }
+          >
+            修改
+          </Typography.Link>
           <Typography.Link>设置底部菜单</Typography.Link>
           {(record.status === '通过' || record.status === '拒绝') && (
             <Typography.Link>删除</Typography.Link>

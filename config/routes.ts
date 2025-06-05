@@ -195,7 +195,13 @@ export default [
           {
             path: '/marketing-service/borui-5g-message/chatbot-management/create',
             name: '创建Chatbot',
-            component: './MarketingService/Borui5GMessage/ChatbotManagement/CreateChatbot',
+            component: './MarketingService/Borui5GMessage/ChatbotManagement/ChatbotForm',
+            hideInMenu: true,
+          },
+          {
+            path: '/marketing-service/borui-5g-message/chatbot-management/edit/:chatbotId',
+            name: '修改Chatbot',
+            component: './MarketingService/Borui5GMessage/ChatbotManagement/ChatbotForm',
             hideInMenu: true,
           },
           {
