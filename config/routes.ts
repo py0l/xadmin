@@ -181,6 +181,12 @@ export default [
             hideInMenu: true,
           },
           {
+            path: '/marketing-service/borui-5g-message/account-review/detail/:accountId',
+            name: '查看开户资料',
+            component: './MarketingService/Borui5GMessage/AccountReview/Detail',
+            hideInMenu: true,
+          },
+          {
             path: '/marketing-service/borui-5g-message/chatbot-management',
             name: 'Chatbot管理',
             component: './MarketingService/Borui5GMessage/ChatbotManagement',
