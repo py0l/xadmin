@@ -193,6 +193,12 @@ export default [
             hideInMenu: true,
           },
           {
+            path: '/marketing-service/borui-5g-message/chatbot-management/create',
+            name: '创建Chatbot',
+            component: './MarketingService/Borui5GMessage/ChatbotManagement/CreateChatbot',
+            hideInMenu: true,
+          },
+          {
             path: '/marketing-service/borui-5g-message/material-management',
             name: '素材管理',
             component: './MarketingService/Borui5GMessage/MaterialManagement',
