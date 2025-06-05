@@ -112,15 +112,17 @@ const ChatbotManagement: React.FC = () => {
             </>
           )}
           <Typography.Link
-            onClick={() =>
-              history.push(
-                `/marketing-service/borui-5g-message/chatbot-management/edit/${record.chatbotId}`,
-              )
-            }
+            onClick={() => history.push(`chatbot-management/edit/${record.chatbotId}`)}
           >
             修改
           </Typography.Link>
-          <Typography.Link>设置底部菜单</Typography.Link>
+          <Typography.Link
+            onClick={() =>
+              history.push(`chatbot-management/bottom-menu-settings/${record.chatbotId}`)
+            }
+          >
+            设置底部菜单
+          </Typography.Link>
           {(record.status === '通过' || record.status === '拒绝') && (
             <Typography.Link>删除</Typography.Link>
           )}
@@ -148,9 +150,7 @@ const ChatbotManagement: React.FC = () => {
         <Button
           type="primary"
           key="create"
-          onClick={() =>
-            history.push('/marketing-service/borui-5g-message/chatbot-management/create')
-          }
+          onClick={() => history.push('chatbot-management/create')}
         >
           <PlusOutlined />
           创建Chatbot

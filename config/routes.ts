@@ -205,6 +205,12 @@ export default [
             hideInMenu: true,
           },
           {
+            path: '/marketing-service/borui-5g-message/chatbot-management/bottom-menu-settings/:chatbotId',
+            name: '设置底部菜单',
+            component: './MarketingService/Borui5GMessage/ChatbotManagement/BottomMenuSettings',
+            hideInMenu: true,
+          },
+          {
             path: '/marketing-service/borui-5g-message/material-management',
             name: '素材管理',
             component: './MarketingService/Borui5GMessage/MaterialManagement',
