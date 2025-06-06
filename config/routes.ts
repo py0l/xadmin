@@ -223,6 +223,12 @@ export default [
             hideInMenu: true,
           },
           {
+            path: '/marketing-service/borui-5g-message/template-management/create',
+            name: '创建模板',
+            component: './MarketingService/Borui5GMessage/TemplateManagement/CreateTemplate',
+            hideInMenu: true,
+          },
+          {
             path: '/marketing-service/borui-5g-message/send-message',
             name: '发送5G消息',
             component: './MarketingService/Borui5GMessage/SendMessage',

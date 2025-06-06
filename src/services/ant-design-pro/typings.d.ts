@@ -188,4 +188,26 @@ declare namespace API {
     total?: number;
     success?: boolean;
   };
+
+  type TemplateItem = {
+    accountUID?: string;
+    phoneNumber?: string;
+    enterpriseName?: string;
+    templateID?: string;
+    templateName?: string;
+    chatbot?: string;
+    fallbackSMSContent?: string;
+    characterCount?: number;
+    billingCount?: number;
+    createTime?: string;
+    status?: string;
+    systemReview?: string;
+    channelReview?: string;
+  };
+
+  type TemplateList = {
+    data?: TemplateItem[];
+    total?: number;
+    success?: boolean;
+  };
 }
