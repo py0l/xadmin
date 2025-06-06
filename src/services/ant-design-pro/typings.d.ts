@@ -228,4 +228,36 @@ declare namespace API {
     _5gMessageSuccessCount?: number; // 5G消息(成功)计费数可能为空
     smsSuccessCount?: number; // 短信(成功)计费数可能为空
   }
+
+  type DataStatisticsItem = {
+    id: string;
+    accountId: string;
+    phoneNumber: string;
+    enterpriseName: string;
+    time: string;
+    _5gSuccess: number;
+    _5gFailure: number;
+    smsSuccess: number;
+    smsFailure: number;
+    successRate: string;
+    submissionCount?: number;
+    submissionSuccessCount?: number;
+    submissionFailureCount?: number;
+  };
+
+  type DataStatisticsList = {
+    data?: DataStatisticsItem[];
+    total?: number;
+    success?: boolean;
+    summary?: {
+      _5gSuccess: number;
+      _5gFailure: number;
+      smsSuccess: number;
+      smsFailure: number;
+      successRate: string;
+      submissionCount?: number;
+      submissionSuccessCount?: number;
+      submissionFailureCount?: number;
+    };
+  };
 }
