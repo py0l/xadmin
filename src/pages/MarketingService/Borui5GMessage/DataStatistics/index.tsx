@@ -1,4 +1,4 @@
-import { queryDataStatistics } from '@/services/dataStatistics';
+import { queryDataStatistics } from '@/services/Borui5GMessage/DataStatistics';
 import { ProColumns, ProTable } from '@ant-design/pro-components';
 import { Radio } from 'antd';
 import moment from 'moment';

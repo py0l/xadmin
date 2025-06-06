@@ -1,5 +1,11 @@
 import { request } from 'umi';
 
+/**
+ * 查询数据统计列表
+ * @param params 查询参数
+ * @param options 请求配置
+ * @returns Promise<API.DataStatisticsList>
+ */
 export async function queryDataStatistics(
   params: {
     pageSize?: number;

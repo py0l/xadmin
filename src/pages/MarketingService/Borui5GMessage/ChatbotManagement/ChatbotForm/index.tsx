@@ -1,4 +1,4 @@
-import { getChatbotDetail } from '@/services/chatbot'; // 导入新的接口
+import { getChatbotDetail } from '@/services/Borui5GMessage/ChatbotManagement'; // 导入新的接口
 import { UploadOutlined } from '@ant-design/icons';
 import {
   ProForm,

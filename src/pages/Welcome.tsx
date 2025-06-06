@@ -4,9 +4,14 @@ import { Card, theme } from 'antd';
 import React from 'react';
 
 /**
- * 每个单独的卡片，为了复用样式抽成了组件
- * @param param0
- * @returns
+ * 信息卡片组件
+ * 用于在欢迎页展示不同框架或组件库的介绍
+ * @param props - 组件属性
+ * @param props.title - 卡片标题
+ * @param props.index - 卡片序号
+ * @param props.desc - 卡片描述
+ * @param props.href - 了解更多链接
+ * @returns React.FC
  */
 const InfoCard: React.FC<{
   title: string;
@@ -15,7 +20,6 @@ const InfoCard: React.FC<{
   href: string;
 }> = ({ title, href, index, desc }) => {
   const { useToken } = theme;
-
   const { token } = useToken();
 
   return (
@@ -39,6 +43,7 @@ const InfoCard: React.FC<{
           alignItems: 'center',
         }}
       >
+        {/* 卡片序号图标 */}
         <div
           style={{
             width: 48,
@@ -55,6 +60,7 @@ const InfoCard: React.FC<{
         >
           {index}
         </div>
+        {/* 卡片标题 */}
         <div
           style={{
             fontSize: '16px',
@@ -65,6 +71,7 @@ const InfoCard: React.FC<{
           {title}
         </div>
       </div>
+      {/* 卡片描述 */}
       <div
         style={{
           fontSize: '14px',
@@ -76,6 +83,7 @@ const InfoCard: React.FC<{
       >
         {desc}
       </div>
+      {/* 了解更多链接 */}
       <a href={href} target="_blank" rel="noreferrer">
         了解更多 {'>'}
       </a>
@@ -83,9 +91,14 @@ const InfoCard: React.FC<{
   );
 };
 
+/**
+ * 欢迎页面组件
+ * 展示 Ant Design Pro 的介绍和相关资源链接
+ */
 const Welcome: React.FC = () => {
   const { token } = theme.useToken();
   const { initialState } = useModel('@@initialState');
+
   return (
     <PageContainer>
       <Card
@@ -93,6 +106,7 @@ const Welcome: React.FC = () => {
           borderRadius: 8,
         }}
         bodyStyle={{
+          // 根据主题设置背景图片
           backgroundImage:
             initialState?.settings?.navTheme === 'realDark'
               ? 'background-image: linear-gradient(75deg, #1A1B1F 0%, #191C1F 100%)'
@@ -108,6 +122,7 @@ const Welcome: React.FC = () => {
               "url('https://gw.alipayobjects.com/mdn/rms_a9745b/afts/img/A*BuFmQqsB2iAAAAAAAAAAAAAAARQnAQ')",
           }}
         >
+          {/* 欢迎标题 */}
           <div
             style={{
               fontSize: '20px',
@@ -116,6 +131,7 @@ const Welcome: React.FC = () => {
           >
             欢迎使用 Ant Design Pro
           </div>
+          {/* 介绍文本 */}
           <p
             style={{
               fontSize: '14px',
@@ -129,6 +145,7 @@ const Welcome: React.FC = () => {
             Ant Design Pro 是一个整合了 umi，Ant Design 和 ProComponents
             的脚手架方案。致力于在设计规范和基础组件的基础上，继续向上构建，提炼出典型模板/业务组件/配套设计资源，进一步提升企业级中后台产品设计研发过程中的『用户』和『设计者』的体验。
           </p>
+          {/* 信息卡片列表 */}
           <div
             style={{
               display: 'flex',

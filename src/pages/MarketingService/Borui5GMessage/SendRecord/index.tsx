@@ -1,4 +1,4 @@
-import { querySendRecordList } from '@/services/sendRecord'; // 导入服务函数
+import { querySendRecordList } from '@/services/Borui5GMessage/SendRecord'; // 导入服务函数
 import { ProColumns, ProTable } from '@ant-design/pro-components';
 import { Popconfirm, Space, Tag, Typography, message } from 'antd';
 import React from 'react';

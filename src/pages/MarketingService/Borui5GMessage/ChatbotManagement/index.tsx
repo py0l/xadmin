@@ -1,4 +1,4 @@
-import { getChatbotList } from '@/services/chatbot';
+import { getChatbotList } from '@/services/Borui5GMessage/ChatbotManagement';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';

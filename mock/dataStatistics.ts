@@ -1,125 +1,64 @@
 import { Request, Response } from 'express';
+import Mock from 'mockjs';
 import moment from 'moment';
 
-const dataStatisticsList = [
-  {
-    id: '1',
-    accountId: 'jk0092',
-    phoneNumber: '13800138002',
-    enterpriseName: '深圳xxxxxx有限公司',
-    time: '2025-01-01',
-    _5gSuccess: 2000000,
-    _5gFailure: 1830000,
-    smsSuccess: 170000,
-    smsFailure: 170000,
-    successRate: '91.50%',
-    submissionCount: 2000000,
-    submissionSuccessCount: 1830000,
-    submissionFailureCount: 200000,
-  },
-  {
-    id: '2',
-    accountId: 'jk0091',
-    phoneNumber: '13800138001',
-    enterpriseName: '深圳xxxxxx有限公司',
-    time: '2025-01-01',
-    _5gSuccess: 2000000,
-    _5gFailure: 1830000,
-    smsSuccess: 170000,
-    smsFailure: 170000,
-    successRate: '91.50%',
-    submissionCount: 2000000,
-    submissionSuccessCount: 1830000,
-    submissionFailureCount: 200000,
-  },
-  {
-    id: '3',
-    accountId: 'jk0093',
-    phoneNumber: '13800138003',
-    enterpriseName: '深圳xxxxxx有限公司',
-    time: '2025-01-01',
-    _5gSuccess: 2000000,
-    _5gFailure: 1830000,
-    smsSuccess: 170000,
-    smsFailure: 170000,
-    successRate: '91.50%',
-    submissionCount: 2000000,
-    submissionSuccessCount: 1830000,
-    submissionFailureCount: 200000,
-  },
-  {
-    id: '4',
-    accountId: 'jk0092',
-    phoneNumber: '13800138002',
-    enterpriseName: '深圳xxxxxx有限公司',
-    time: '2025-01-01',
-    _5gSuccess: 2000000,
-    _5gFailure: 1630700,
-    smsSuccess: 369300,
-    smsFailure: 369300,
-    successRate: '81.54%',
-    submissionCount: 2000000,
-    submissionSuccessCount: 1630700,
-    submissionFailureCount: 200000,
-  },
-  {
-    id: '5',
-    accountId: 'jk0091',
-    phoneNumber: '13800138001',
-    enterpriseName: '深圳赛格股份有限公司',
-    time: '2025-01-01',
-    _5gSuccess: 2000000,
-    _5gFailure: 1830000,
-    smsSuccess: 170000,
-    smsFailure: 170000,
-    successRate: '91.50%',
-    submissionCount: 2000000,
-    submissionSuccessCount: 1830000,
-    submissionFailureCount: 200000,
-  },
-  {
-    id: '6',
-    accountId: 'jk0092',
-    phoneNumber: '13800138002',
-    enterpriseName: '深圳xxxxxx有限公司',
-    time: '2025-01-01',
-    _5gSuccess: 2000000,
-    _5gFailure: 1903030,
-    smsSuccess: 96970,
-    smsFailure: 96970,
-    successRate: '95.15%',
-    submissionCount: 2000000,
-    submissionSuccessCount: 1903030,
-    submissionFailureCount: 200000,
-  },
-  {
-    id: '7',
-    accountId: 'jk0091',
-    phoneNumber: '13800138001',
-    enterpriseName: '深圳赛格股份有限公司',
-    time: '2025-01-01',
-    _5gSuccess: 2000000,
-    _5gFailure: 1900000,
-    smsSuccess: 100000,
-    smsFailure: 100000,
-    successRate: '95.00%',
-    submissionCount: 2000000,
-    submissionSuccessCount: 1900000,
-    submissionFailureCount: 200000,
-  },
-];
+/**
+ * 生成单个数据统计项的模板
+ */
+const dataStatisticsItemTemplate = {
+  id: '@guid', // 唯一ID
+  accountId: 'jk@string("number", 3)', // 账户ID
+  phoneNumber: /^1[3-9]\d{9}$/, // 手机号码
+  enterpriseName: '@cword(5, 10)有限公司', // 企业名称
+  time: () => Mock.Random.date('yyyy-MM-dd'), // 时间
+  _5gSuccess: '@integer(100000, 2000000)', // 5G 消息成功数
+  _5gFailure: '@integer(10000, 500000)', // 5G 消息失败数
+  smsSuccess: '@integer(10000, 200000)', // 短信成功数
+  smsFailure: '@integer(1000, 50000)', // 短信失败数
+  submissionCount: '@integer(1000000, 3000000)', // 提交总数
+  submissionSuccessCount: '@integer(800000, 2500000)', // 提交成功数
+  submissionFailureCount: '@integer(50000, 500000)', // 提交失败数
+  // 成功率将在生成列表时计算
+};
+
+/**
+ * 生成指定数量的数据统计列表
+ * @param count 生成的数量
+ * @returns 数据统计列表数组
+ */
+const generateDataStatisticsList = (count: number) => {
+  const list = [];
+  for (let i = 0; i < count; i++) {
+    const item = Mock.mock(dataStatisticsItemTemplate);
+    // 计算成功率
+    const totalSuccess = item._5gSuccess + item.smsSuccess;
+    const totalFailure = item._5gFailure + item.smsFailure;
+    const total = totalSuccess + totalFailure;
+    item.successRate = total > 0 ? ((totalSuccess / total) * 100).toFixed(2) + '%' : '0.00%';
+    list.push(item);
+  }
+  return list;
+};
+
+// 生成一个固定的大列表用于筛选和分页
+const allDataStatisticsList = generateDataStatisticsList(50); // 生成 50 条模拟数据
 
 export default {
+  /**
+   * 获取数据统计列表接口
+   * 支持分页、账户ID和时间范围筛选
+   */
   'GET /api/dataStatistics': (req: Request, res: Response) => {
     const { pageSize = 10, current = 1, accountId, timeRange } = req.query;
 
-    let filteredData = dataStatisticsList;
+    let filteredData = [...allDataStatisticsList]; // 使用生成的列表进行筛选
 
-    // 模拟筛选逻辑
+    // 根据账户ID筛选
     if (accountId) {
       filteredData = filteredData.filter((item) => item.accountId === accountId);
     }
 
+    // 根据时间范围筛选
     if (timeRange && Array.isArray(timeRange) && timeRange.length === 2) {
       const [startTime, endTime] = timeRange;
       filteredData = filteredData.filter((item) => {
@@ -146,12 +85,12 @@ export default {
       (sum, item) => sum + item.submissionFailureCount,
       0,
     );
+
+    const totalOverallSuccess = total_5gSuccess + totalSmsSuccess;
+    const totalOverallFailure = total_5gFailure + totalSmsFailure;
+    const totalOverall = totalOverallSuccess + totalOverallFailure;
     const totalSuccessRate =
-      (
-        ((total_5gSuccess + totalSmsSuccess) /
-          (total_5gSuccess + total_5gFailure + totalSmsSuccess + totalSmsFailure)) *
-        100
-      ).toFixed(2) + '%';
+      totalOverall > 0 ? ((totalOverallSuccess / totalOverall) * 100).toFixed(2) + '%' : '0.00%';
 
     res.send({
       data: paginatedList,

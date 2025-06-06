@@ -1,5 +1,11 @@
 import { request } from '@umijs/max';
 
+/**
+ * 获取 Chatbot 列表
+ * @param params 查询参数
+ * @param options 请求配置
+ * @returns Promise<any>
+ */
 export async function getChatbotList(
   params: {
     pageSize?: number;
@@ -20,6 +26,12 @@ export async function getChatbotList(
   });
 }
 
+/**
+ * 获取 Chatbot 详情
+ * @param chatbotId Chatbot ID
+ * @param options 请求配置
+ * @returns Promise<any>
+ */
 export async function getChatbotDetail(chatbotId: string, options?: { [key: string]: any }) {
   return request(`/api/chatbot/detail/${chatbotId}`, {
     method: 'GET',

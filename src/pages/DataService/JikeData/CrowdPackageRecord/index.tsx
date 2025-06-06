@@ -1,4 +1,4 @@
-import { queryCrowdPackageRecord } from '@/services/jikeData';
+import { queryCrowdPackageRecord } from '@/services/JikeData';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { history } from '@umijs/max';

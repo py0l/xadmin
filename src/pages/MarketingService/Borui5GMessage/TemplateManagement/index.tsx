@@ -1,5 +1,4 @@
-// import { queryTemplateList } from '@/services/templateManagement'; // 假设存在此服务
-import { queryTemplateList } from '@/services/templateManagement';
+import { queryTemplateList } from '@/services/Borui5GMessage/TemplateManagement';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
