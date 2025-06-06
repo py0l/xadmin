@@ -210,4 +210,22 @@ declare namespace API {
     total?: number;
     success?: boolean;
   };
+
+  interface SendRecordItem {
+    accountId: string;
+    phoneNumber: string;
+    enterpriseName: string;
+    taskId: string;
+    taskName: string;
+    chatbotName: string;
+    fallbackSmsContent: string;
+    charCount: number;
+    billingCount: number;
+    numberCount: number;
+    submissionTime: string;
+    status: string;
+    completionTime?: string; // 完成时间可能为空
+    _5gMessageSuccessCount?: number; // 5G消息(成功)计费数可能为空
+    smsSuccessCount?: number; // 短信(成功)计费数可能为空
+  }
 }
