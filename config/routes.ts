@@ -225,7 +225,7 @@ export default [
           {
             path: '/marketing-service/borui-5g-message/template-management/create',
             name: '创建模板',
-            component: './MarketingService/Borui5GMessage/TemplateManagement/CreateTemplate',
+            component: './MarketingService/Borui5GMessage/TemplateManagement/Create',
             hideInMenu: true,
           },
           {
