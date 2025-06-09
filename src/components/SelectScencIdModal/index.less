@@ -1,0 +1,57 @@
+.label {
+  padding: 5px 12px;
+  color: rgba(0, 0, 0, 65%);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  border: 1px solid rgba(0, 0, 0, 15%);
+  border-radius: 2px;
+  border-end-end-radius: 0;
+  border-start-end-radius: 0;
+  margin-inline-end: -1px;
+}
+
+.tip {
+  margin-bottom: 12px;
+  color: rgba(2, 4, 13, 45%);
+  font-weight: 400;
+  font-size: 14px;
+  font-family: 'Ping Fang SC';
+  font-style: normal;
+  line-height: 20px;
+  text-align: left;
+}
+
+.num {
+  color: rgb(2, 4, 13, 85%);
+  font-weight: 500;
+}
+
+.pagination-total {
+  color: rgba(2, 4, 13, 65%);
+  font-weight: 400;
+  font-size: 14px;
+  font-family: 'Ping Fang SC';
+  font-style: normal;
+  line-height: 22px;
+  text-align: right;
+}
+
+.page-footer {
+  position: absolute;
+  margin-top: -47px;
+}
+
+.fix-pagination {
+  margin-bottom: 0 !important;
+
+  :global {
+    .ant-pagination-jump-next,
+    .ant-pagination-jump-prev {
+      .ant-pagination-item-link {
+        border: 0 !important;
+      }
+    }
+  }
+}

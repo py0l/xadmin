@@ -1,0 +1,104 @@
+/* stylelint-disable selector-class-pattern */
+.amap-circle-node.amap-circle-moveNode,
+.amap-circle-node.amap-circle-resizeNode {
+  width: 32px !important;
+  height: 40px !important;
+  /* stylelint-disable-next-line function-url-quotes */
+  background: url(https://static.igeekee.cn/ekeliu-static/gap/posiiton_max.png) !important;
+  transform: translate(-12px, -29px);
+}
+
+.amap-marker-label {
+  padding: 4px 6px;
+  border: 0 !important;
+  border-radius: 4px;
+  box-shadow: 0 9px 28px 8px rgba(0, 0, 0, 5%), 0 6px 16px 0 rgba(0, 0, 0, 8%),
+    0 3px 6px -4px rgba(0, 0, 0, 12%);
+  transform: translate(-2px, -14px);
+}
+
+.custom-content-marker {
+  pointer-events: none;
+}
+
+.do-map-editpoint {
+  position: relative;
+  pointer-events: all;
+
+  .circle {
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    border: 2px solid rgba(25, 89, 236, 100%);
+    border-radius: 50%;
+  }
+}
+
+.do-com-maptooltip {
+  pointer-events: none;
+  // display: flex;
+  // width: auto;
+  & + .amap-marker-label {
+    color: var(--color-text-85);
+    font-weight: 400;
+    font-size: 12px;
+    user-select: none;
+    pointer-events: none;
+  }
+}
+
+.amap-marker {
+  .amap-icon {
+    user-select: none !important;
+  }
+}
+
+.do-com-maptooltip-draw {
+  & + .amap-marker-label {
+    color: rgba(255, 255, 255, 85%);
+    font-weight: 400;
+    font-size: 12px;
+    background-color: rgba(2, 4, 13, 85%);
+    transform: translateX(-50%);
+    cursor: pointer;
+    user-select: none;
+  }
+}
+
+.do-com-maptooltip-area {
+  & + .amap-marker-label {
+    transform: translateX(-50%) translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+  }
+}
+
+.map-circle-animation {
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  animation: map-circle-animation 0.6s;
+}
+
+@keyframes map-circle-animation {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.5);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.edit-polygon-form-wrapper {
+  user-select: none;
+}

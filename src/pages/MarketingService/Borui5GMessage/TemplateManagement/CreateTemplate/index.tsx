@@ -1,4 +1,4 @@
-import { PageContainer } from '@ant-design/pro-layout';
+import { PageContainer } from '@ant-design/pro-components';
 import { Card, Typography } from 'antd';
 import React from 'react';
 

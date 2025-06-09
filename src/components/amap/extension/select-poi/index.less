@@ -1,0 +1,58 @@
+.do-infoWindow-wrap {
+  border-radius: 4px;
+  user-select: none;
+  pointer-events: all;
+
+  .paragraph {
+    display: flex;
+    display: inline-block;
+    justify-content: space-between;
+    margin-bottom: 0;
+    color: var(--color-text-85);
+  }
+
+  .ant-checkbox-checked + span {
+    color: #1890ff; /* 设置文字颜色 */
+  }
+
+  &::before {
+    //   position: absolute;
+    //   bottom: -8px;
+    //   left: 50%;
+    //   border-width: 10px;
+    //   border-style: solid;
+    border-color: transparent;
+    //   content: '';
+    //   transform: translateX(-50%) rotate(180deg);
+  }
+
+  .list {
+    &__item {
+      padding: 2px 8px;
+      white-space: nowrap;
+      background: #fff;
+      border: 1px solid #0057ff;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 20%);
+
+      &::after {
+        position: absolute;
+        bottom: -46px;
+        left: 50%;
+        width: 28px;
+        height: 48px;
+        background-image: url('@/assets/common/line.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+        transform: translateX(-50%);
+        content: ' ';
+      }
+
+      .title {
+        color: rgba(2, 4, 13, 65%);
+        font-size: 12px;
+      }
+    }
+  }
+}

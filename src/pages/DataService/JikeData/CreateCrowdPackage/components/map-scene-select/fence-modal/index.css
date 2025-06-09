@@ -1,0 +1,33 @@
+.do-modal-fence .map-wrapper {
+  position: relative;
+  width: 872px;
+  height: 492px;
+}
+.do-modal-fence .do-com-toolchats-wrapper {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+.do-modal-fence #map-container {
+  height: 492px;
+}
+.do-modal-fence .right-wrapper {
+  position: relative;
+  height: 506px;
+  flex: 1;
+}
+.do-modal-fence .right-wrapper .title {
+  color: rgba(2, 4, 13, 0.85);
+  font-size: 14px;
+  font-weight: 500;
+}
+.do-modal-fence .right-wrapper .ant-input-group-addon {
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.65);
+}
+.do-modal-fence .right-wrapper .clear-btn {
+  background: #fc5c27 !important;
+  color: #fff !important;
+  font-size: 14px;
+  font-weight: 400;
+}

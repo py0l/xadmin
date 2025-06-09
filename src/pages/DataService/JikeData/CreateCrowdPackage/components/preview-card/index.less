@@ -1,0 +1,180 @@
+.do-page-previewcard {
+  padding: 20px;
+
+  .ant-typography {
+    color: rgba(2, 4, 13, 85%);
+  }
+
+  .info-title {
+    min-width: 80px;
+    color: rgba(2, 4, 13, 45%);
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  .delete-btn {
+    margin-left: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    user-select: none;
+
+    &:hover {
+      color: #4d6aff;
+      transition: all 0.3s;
+    }
+  }
+
+  .info-content {
+    color: rgba(2, 4, 13, 85%);
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  .ant-steps.ant-steps-vertical > .ant-steps-item .ant-steps-item-icon {
+    margin-inline-end: 8px;
+  }
+
+  .do-progressdot-dropdown {
+    position: absolute;
+    top: -3px;
+    left: 20px;
+    padding: 6px 8px;
+    background: rgba(77, 106, 255, 8%);
+    border-radius: 4px;
+
+    .ant-space-gap-col-small {
+      column-gap: 0;
+    }
+
+    .ant-space-item {
+      color: #4d6aff;
+
+      img {
+        width: 12px;
+        height: 12px;
+        margin-left: 2px;
+      }
+    }
+  }
+
+  .ant-steps-item-tail {
+    &::after {
+      position: relative;
+      top: -9px;
+      left: 0;
+      width: 1px;
+      height: calc(100% + 26px) !important;
+    }
+  }
+
+  .progressdot-type {
+    position: absolute;
+    top: -51px;
+    width: 200px;
+    text-align: left;
+  }
+
+  .ant-steps-item {
+    &:last-child {
+      .ant-steps-item-description {
+        padding-bottom: 12px !important;
+      }
+    }
+  }
+
+  .progressdot-circle {
+    position: relative;
+    top: 1px;
+    width: 15px;
+    height: 8px;
+    background: #fff;
+    border: 1px solid #4d6aff;
+    border-radius: 50%;
+  }
+
+  .ant-steps-item-description {
+    padding-bottom: 64px !important;
+  }
+
+  .step-icon-wrap {
+    position: relative;
+    left: -6px;
+    display: flex;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border: 1px solid #4d6aff;
+    border-radius: 2px;
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .ant-steps-item-title {
+    margin-bottom: 4px;
+    color: rgba(2, 4, 13, 85%) !important;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .rule-item {
+    max-height: 300px;
+    padding: 12px;
+    overflow: auto;
+    background: #fff;
+    border: 1px solid rgba(2, 4, 13, 12%);
+    border-radius: 8px;
+  }
+
+  .empty {
+    color: rgba(2, 4, 13, 65%);
+    font-weight: 400;
+    font-size: 14px;
+    user-select: none;
+
+    img {
+      width: 138px;
+      height: 66px;
+      margin-bottom: 12px;
+    }
+  }
+
+  .add-fn {
+    margin-top: 8px;
+    margin-left: 16px;
+
+    .title {
+      margin-bottom: 8px;
+      color: rgba(2, 4, 13, 85%);
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    &-item {
+      width: 106px;
+      height: 44px;
+      color: rgba(2, 4, 13, 65%);
+      font-weight: 400;
+      font-size: 14px;
+      background: rgba(2, 4, 13, 4%);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        color: rgba(77, 106, 255, 100%);
+        transition: all 0.3s;
+      }
+
+      img {
+        width: 18px;
+        height: 18px;
+        margin-right: 4px;
+      }
+    }
+  }
+}

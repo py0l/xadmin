@@ -1,5 +1,7 @@
 import { AvatarDropdown, AvatarName, Footer, Question } from '@/components';
+import '@/components/amap';
 import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/login';
+import '@/style/iconfont/index.less';
 import { LinkOutlined } from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';

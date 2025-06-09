@@ -1,0 +1,94 @@
+.map-data-wrapper {
+  position: absolute;
+  z-index: 100;
+  top: 20px;
+  left: 20px;
+  width: 156px;
+}
+.map-data-wrapper .do-fence-toggle {
+  position: absolute;
+  width: 202px;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 3px 6px 0 rgba(2, 4, 13, 0.2);
+}
+.map-data-wrapper .do-fence-toggle .data-wrap-item {
+  position: relative;
+}
+.map-data-wrapper .do-fence-toggle .data-wrap-item span {
+  margin-left: 1px;
+}
+.map-data-wrapper .do-fence-toggle .data-wrap-item .iconfont {
+  position: absolute;
+  top: 7px;
+  right: -10px;
+  transform: rotate(180deg);
+}
+.map-data-wrapper .do-fence-toggle .data-wrap-item .rote-down {
+  top: 9px;
+  transform: rotate(0deg) !important;
+}
+.map-data-wrapper .do-fence-toggle .active {
+  background: rgba(77, 106, 255, 0.1);
+}
+.map-data-wrapper .do-fence-toggle-item {
+  position: relative;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  user-select: none;
+}
+.map-data-wrapper .do-fence-toggle-item::after {
+  position: absolute;
+  top: 50%;
+  right: -4px;
+  display: inline-block;
+  margin-top: -1px;
+  color: #ebebec;
+  content: '|';
+  transform: translateY(-50%);
+}
+.map-data-wrapper .do-fence-toggle-item:last-child::after {
+  display: none;
+}
+.map-data-wrapper .do-fence-toggle img {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+.map-data-wrapper .toggle-btn {
+  position: relative;
+  left: 52px;
+  display: flex;
+  width: 104px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  background-color: #fff;
+  box-shadow: 0 3px 6px 0 rgba(2, 4, 13, 0.2);
+  color: #4d6aff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  user-select: none;
+}
+.map-data-wrapper .toggle-card {
+  height: 160px;
+  padding: 16px 10px;
+  border-radius: 4px;
+  margin-top: 50px;
+  background: #fff;
+  box-shadow: 0 3px 6px 0 rgba(2, 4, 13, 0.2);
+}
+.map-data-wrapper .toggle-card span {
+  color: rgba(2, 4, 13, 0.65);
+  font-size: 14px;
+  line-height: 22px;
+}
+.map-data-wrapper img {
+  width: 20px;
+  height: 20px;
+}

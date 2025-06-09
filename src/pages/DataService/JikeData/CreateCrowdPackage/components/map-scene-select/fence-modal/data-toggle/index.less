@@ -1,0 +1,114 @@
+.map-data-wrapper {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+  width: 156px;
+
+  .do-fence-toggle {
+    // position: absolute;
+    // z-index: 100;
+    // top: 20px;
+    // left: 20px;
+    position: absolute;
+    width: 202px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px 0 rgba(2, 4, 13, 20%);
+
+    .data-wrap-item {
+      position: relative;
+
+      span {
+        margin-left: 1px;
+      }
+
+      .iconfont {
+        position: absolute;
+        top: 7px;
+        right: -10px;
+        transform: rotate(180deg);
+      }
+
+      .rote-down {
+        top: 9px;
+        transform: rotate(0deg) !important;
+      }
+    }
+
+    .active {
+      background: rgba(77, 106, 255, 10%);
+    }
+
+    &-item {
+      position: relative;
+      padding: 6px 12px;
+      font-weight: 400;
+      font-size: 14px;
+      cursor: pointer;
+      user-select: none;
+
+      &::after {
+        position: absolute;
+        top: 50%;
+        right: -4px;
+        display: inline-block;
+        margin-top: -1px;
+        color: #ebebec;
+        transform: translateY(-50%);
+        content: '|';
+      }
+
+      &:last-child {
+        &::after {
+          display: none;
+        }
+      }
+    }
+
+    img {
+      position: relative;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .toggle-btn {
+    position: relative;
+    left: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 104px;
+    height: 32px;
+    margin-bottom: 12px;
+    color: #4d6aff;
+    font-weight: 400;
+    font-size: 14px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px 0 rgba(2, 4, 13, 20%);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .toggle-card {
+    height: 160px;
+    margin-top: 50px;
+    padding: 16px 10px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px 0 rgba(2, 4, 13, 20%);
+
+    span {
+      color: rgba(2, 4, 13, 65%);
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
