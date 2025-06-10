@@ -1,0 +1,43 @@
+# deploy.yml
+
+name: Deploy to GitHub Pages
+
+# 触发条件：在 push 到 main 分支后，自动执行
+on:
+  push:
+    branches:
+      - main # 或者你的主分支名，如 master
+
+# Jobs: 执行的任务
+jobs:
+  build-and-deploy:
+    # 服务器环境：最新版 Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      # 步骤1：拉取代码
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # 步骤2：设置 Node.js 环境
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # 建议使用 Ant Design Pro 推荐的 Node 版本
+          cache: 'npm' # 或者 'yarn'
+
+      # 步骤3：安装依赖
+      - name: Install dependencies
+        run: npm install # 或者 yarn install
+
+      # 步骤4：构建项目
+      - name: Build
+        run: npm run build # 或者 yarn build
+
+      # 步骤5：部署到 GitHub Pages
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # 构建输出目录，Ant Design Pro 默认为 dist
+          publish_dir: ./dist
