@@ -1,0 +1,158 @@
+.menuItem {
+  &:hover {
+    background: #f5f5f5;
+  }
+}
+
+.cardItem {
+  margin-bottom: 16px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+  }
+}
+
+.buttonList {
+  margin-top: 16px;
+  padding: 8px;
+  background: #fafafa;
+  border-radius: 4px;
+}
+
+.buttonItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 8px;
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.uploadArea {
+  :global {
+    .ant-upload-list {
+      margin-top: 8px;
+    }
+  }
+}
+
+.tabsContainer {
+  display: flex;
+  height: calc(100vh - 380px);
+  margin-top: 16px;
+  overflow: hidden;
+}
+
+.contentContainer {
+  flex: 1;
+  margin-left: 24px;
+  padding: 0 24px;
+  overflow-y: auto;
+  border-left: 1px solid #f0f0f0;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f0f0f0;
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+  // min-height: calc(100vh - 700px);
+  padding: 24px 0;
+
+  h2 {
+    margin-bottom: 24px;
+    color: #1f1f1f;
+    font-weight: 500;
+    font-size: 18px;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .ant-form {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .ant-card {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    .ant-card-body {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+    }
+
+    .ant-form {
+      flex: 1;
+    }
+  }
+}
+
+:global {
+  .ant-tabs-left {
+    .ant-tabs-nav {
+      min-width: 120px;
+      margin-right: 0;
+      margin-bottom: 0;
+    }
+
+    .ant-tabs-nav-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ant-tabs-tab {
+      display: flex;
+      align-items: center;
+      height: 48px;
+      margin: 0 !important;
+      padding: 16px;
+      text-align: left;
+      transition: all 0.3s;
+
+      &:hover {
+        color: #1890ff;
+      }
+
+      &.ant-tabs-tab-active {
+        background: #e6f7ff;
+        border-right: 2px solid #1890ff;
+      }
+    }
+
+    .ant-tabs-content {
+      display: none;
+    }
+
+    .ant-tabs-ink-bar {
+      display: none;
+    }
+  }
+}
