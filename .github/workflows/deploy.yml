@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write # 授予 'contents' (仓库内容) 的写入权限
+      pages: write
 
     steps:
       # 步骤1：拉取代码
@@ -39,7 +39,7 @@ jobs:
 
       # 步骤5：部署到 GitHub Pages
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           # 构建输出目录，Ant Design Pro 默认为 dist
