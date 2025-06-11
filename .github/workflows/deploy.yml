@@ -15,8 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      pages: write
-      packages: write
+      contents: write
 
     steps:
       # 步骤1：拉取代码
