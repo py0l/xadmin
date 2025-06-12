@@ -29,6 +29,15 @@ jobs:
           node-version: '18' # 建议使用 Ant Design Pro 推荐的 Node 版本
           cache: 'npm' # 或者 'yarn'
 
+          # (可选，但推荐) 缓存依赖，加快构建速度
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm # npm 缓存路径
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       # 步骤3：安装依赖
       - name: Install dependencies
         run: npm install # 或者 yarn install
