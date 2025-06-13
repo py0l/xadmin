@@ -1,13 +1,14 @@
 import { AvatarDropdown, AvatarName, Footer, Question } from '@/components';
 import '@/components/amap';
 import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/login';
+import { getUnreadMessageCounts } from '@/services/unreadMessage';
 import '@/style/iconfont/index.less';
 import { LinkOutlined } from '@ant-design/icons';
-import type { Settings as LayoutSettings } from '@ant-design/pro-components';
+import type { Settings as LayoutSettings, MenuDataItem } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
 import { history, Link } from '@umijs/max';
-import { App, ConfigProvider } from 'antd'; // 导入 App 组件
+import { App, Badge, ConfigProvider, Flex } from 'antd'; // 导入 App 组件
 import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
 
@@ -31,6 +32,7 @@ export async function getInitialState(): Promise<{
   currentUser?: API.CurrentUser;
   loading?: boolean;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
+  unreadCounts?: Record<string, number>; // 添加未读消息数量
 }> {
   const fetchUserInfo = async () => {
     try {
@@ -47,10 +49,14 @@ export async function getInitialState(): Promise<{
   const { location } = history;
   if (location.pathname !== loginPath) {
     const currentUser = await fetchUserInfo();
+    const unreadMessageRes = await getUnreadMessageCounts();
+    const unreadCounts = unreadMessageRes?.data || {};
+
     return {
       fetchUserInfo,
       currentUser,
       settings: defaultSettings as Partial<LayoutSettings>,
+      unreadCounts,
     };
   }
   return {
@@ -110,6 +116,45 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
         ]
       : [],
     menuHeaderRender: undefined,
+    menuDataRender: (menuData) => {
+      const { unreadCounts } = initialState || {};
+
+      const processMenuData = (data: any[]) => {
+        return data.map((item) => {
+          const newItem = { ...item };
+          if (newItem.path && unreadCounts && unreadCounts[newItem.path] > 0) {
+            newItem.badge = { dot: true };
+          }
+          if (newItem.children) {
+            newItem.children = processMenuData(newItem.children);
+          }
+          return newItem;
+        });
+      };
+      return processMenuData(menuData);
+    },
+    menuItemRender: (itemProps: MenuDataItem, defaultDom) => {
+      if (itemProps.badge) {
+        return (
+          <Link to={itemProps.path!}>
+            <Flex align="center" justify="space-between">
+              {defaultDom}
+              <Badge
+                offset={[-4, 0]}
+                styles={{
+                  indicator: {
+                    height: 8,
+                    minWidth: 8,
+                  },
+                }}
+                {...itemProps.badge}
+              />
+            </Flex>
+          </Link>
+        );
+      }
+      return <Link to={itemProps.path!}>{defaultDom}</Link>;
+    },
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
     // 增加一个 loading 的状态
