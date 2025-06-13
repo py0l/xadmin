@@ -31,7 +31,6 @@ export async function getInitialState(): Promise<{
   currentUser?: API.CurrentUser;
   loading?: boolean;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
-  apiUrl?: string; // 添加 apiUrl 属性
 }> {
   const fetchUserInfo = async () => {
     try {

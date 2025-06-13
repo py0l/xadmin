@@ -2,7 +2,6 @@ import { Footer } from '@/components';
 import { getFakeCaptcha, login } from '@/services/ant-design-pro/login';
 import {
   AlipayCircleOutlined,
-  ApiOutlined,
   LockOutlined,
   MobileOutlined,
   TaobaoCircleOutlined,
@@ -88,11 +87,6 @@ const Login: React.FC = () => {
   };
   const handleSubmit = async (values: API.LoginParams) => {
     try {
-      // 保存连接地址到 localStorage
-      if (values.url) {
-        localStorage.setItem('apiBaseUrl', values.url);
-      }
-
       // 登录
       const msg = await login({
         ...values,
@@ -191,20 +185,6 @@ const Login: React.FC = () => {
                   {
                     required: true,
                     message: '密码是必填项！',
-                  },
-                ]}
-              />
-              <ProFormText
-                name="url"
-                fieldProps={{
-                  size: 'large',
-                  prefix: <ApiOutlined />,
-                }}
-                placeholder="连接地址"
-                rules={[
-                  {
-                    required: true,
-                    message: '连接地址是必填项！',
                   },
                 ]}
               />

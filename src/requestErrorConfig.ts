@@ -89,10 +89,6 @@ export const errorConfig: RequestConfig = {
   requestInterceptors: [
     (config: RequestOptions) => {
       // 拦截请求配置，进行个性化处理。
-      const apiBaseUrl = localStorage.getItem('apiBaseUrl'); // 从 localStorage 获取
-      if (apiBaseUrl) {
-        config.baseURL = apiBaseUrl; // 设置请求的基础 URL
-      }
       const url = config?.url?.concat('?token = 123');
       return { ...config, url };
     },

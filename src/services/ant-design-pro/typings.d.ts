@@ -66,7 +66,6 @@ declare namespace API {
     password?: string;
     autoLogin?: boolean;
     type?: string;
-    url?: string; // 添加 url 属性
   };
 
   type ErrorResponse = {
