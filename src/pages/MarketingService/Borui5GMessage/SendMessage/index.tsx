@@ -8,8 +8,8 @@ import {
   ProFormSwitch,
   ProFormText,
   ProFormTextArea,
-} from '@ant-design/pro-form';
-import ProTable from '@ant-design/pro-table';
+  ProTable,
+} from '@ant-design/pro-components';
 import { Button, Card, Col, message, Modal, Row, Tag, Typography, Upload } from 'antd';
 import type { UploadFile } from 'antd/es/upload/interface';
 import type { Key } from 'react';
