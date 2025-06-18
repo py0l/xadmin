@@ -1,0 +1,96 @@
+{
+  "data": [
+    {
+      "uid": "jk566",
+      "phone": "18927193328",
+      "enterpriseName": "程的调合务听太资同有限公司",
+      "chatbotId": "471051",
+      "chatbotName": "【Chatbot的名称】回党",
+      "createTime": "2022-11-25 03:01:34",
+      "status": "同意"
+    },
+    {
+      "uid": "jk834",
+      "phone": "15499921354",
+      "enterpriseName": "生大验作斗开始己强有限公司",
+      "chatbotId": "675767",
+      "chatbotName": "【Chatbot的名称】听定",
+      "createTime": "2019-04-20 04:37:21",
+      "status": "审核中"
+    },
+    {
+      "uid": "jk210",
+      "phone": "14446787401",
+      "enterpriseName": "教备性及再治西带有限公司",
+      "chatbotId": "108871",
+      "chatbotName": "【Chatbot的名称】已场酸都",
+      "createTime": "1973-11-23 15:48:10",
+      "status": "通过"
+    },
+    {
+      "uid": "jk434",
+      "phone": "19719767220",
+      "enterpriseName": "四者意重何有限公司",
+      "chatbotId": "105575",
+      "chatbotName": "【Chatbot的名称】高十或",
+      "createTime": "1975-04-01 10:32:51",
+      "status": "拒绝"
+    },
+    {
+      "uid": "jk347",
+      "phone": "19693239014",
+      "enterpriseName": "花社传队满八有限公司",
+      "chatbotId": "151176",
+      "chatbotName": "【Chatbot的名称】意克都什",
+      "createTime": "2015-08-18 19:41:06",
+      "status": "同意"
+    },
+    {
+      "uid": "jk231",
+      "phone": "16433433125",
+      "enterpriseName": "义制改计你有限公司",
+      "chatbotId": "683813",
+      "chatbotName": "【Chatbot的名称】术传间",
+      "createTime": "1983-06-30 11:55:28",
+      "status": "审核中"
+    },
+    {
+      "uid": "jk156",
+      "phone": "17245574086",
+      "enterpriseName": "世果千整都办有限公司",
+      "chatbotId": "934667",
+      "chatbotName": "【Chatbot的名称】动较县志",
+      "createTime": "2021-12-12 07:25:22",
+      "status": "通过"
+    },
+    {
+      "uid": "jk661",
+      "phone": "15205635677",
+      "enterpriseName": "查党比研向算有限公司",
+      "chatbotId": "874455",
+      "chatbotName": "【Chatbot的名称】队济平",
+      "createTime": "2024-12-09 16:45:15",
+      "status": "拒绝"
+    },
+    {
+      "uid": "jk277",
+      "phone": "13458316116",
+      "enterpriseName": "维参规本信走入确有限公司",
+      "chatbotId": "941226",
+      "chatbotName": "【Chatbot的名称】斯接眼",
+      "createTime": "1988-09-08 06:06:20",
+      "status": "同意"
+    },
+    {
+      "uid": "jk513",
+      "phone": "17232098624",
+      "enterpriseName": "片利革线群存便去有限公司",
+      "chatbotId": "415238",
+      "chatbotName": "【Chatbot的名称】内新位内",
+      "createTime": "2004-07-24 14:06:52",
+      "status": "审核中"
+    }
+  ],
+  "total": 50,
+  "success": true
+}

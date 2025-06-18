@@ -1,0 +1,17 @@
+{
+  "data": {
+    "phoneNumber": "19026887655",
+    "enterpriseName": "式族于价林第思者。有限公司",
+    "userRole": "普通客户",
+    "dataServices": {
+      "generalDataPrice": 4.43,
+      "accurateDataPrice": 10.18
+    },
+    "marketingServices": {
+      "fiveGMessagePrice": 0.26,
+      "textMessagePrice": 0.26
+    }
+  },
+  "success": true,
+  "message": "获取价格详情成功"
+}

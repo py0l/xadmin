@@ -1,0 +1,46 @@
+{
+  "data": [
+    {
+      "uid": "jk0092",
+      "phoneNumber": "13800138002",
+      "userRole": "普通客户",
+      "enterpriseName": "深圳创鑫技术有限公司",
+      "applicationTime": "2024-08-18 17:35",
+      "status": "pending"
+    },
+    {
+      "uid": "jk0091",
+      "phoneNumber": "13800138001",
+      "userRole": "普通客户",
+      "enterpriseName": "深圳赛格股份有限公司",
+      "applicationTime": "2024-08-15 17:35",
+      "status": "pending"
+    },
+    {
+      "uid": "jk0090",
+      "phoneNumber": "13800138000",
+      "userRole": "普通客户",
+      "enterpriseName": "广州市天河软件园有限公司",
+      "applicationTime": "2024-08-14 10:00",
+      "status": "approved"
+    },
+    {
+      "uid": "jk0089",
+      "phoneNumber": "13800138003",
+      "userRole": "代理商",
+      "enterpriseName": "北京创新科技有限公司",
+      "applicationTime": "2024-08-13 11:00",
+      "status": "pending"
+    },
+    {
+      "uid": "jk0088",
+      "phoneNumber": "13800138004",
+      "userRole": "运营人员",
+      "enterpriseName": "上海科技发展有限公司",
+      "applicationTime": "2024-08-12 12:00",
+      "status": "rejected"
+    }
+  ],
+  "success": true,
+  "total": 5
+}

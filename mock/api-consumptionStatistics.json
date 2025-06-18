@@ -1,0 +1,106 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "transactionTime": "2025-06-18 01:34:34",
+      "account": "13800138001(深圳赛格股份有限公司)",
+      "incomeExpenseType": "收入",
+      "transactionType": "充值",
+      "amount": 10000,
+      "itemName": "充值",
+      "balance": 10000
+    },
+    {
+      "id": "2",
+      "transactionTime": "2025-06-17 01:34:34",
+      "account": "13800138002(未认证)",
+      "incomeExpenseType": "支出",
+      "transactionType": "短信服务",
+      "amount": -100,
+      "itemName": "(发送短信的任务名称)",
+      "balance": 9900
+    },
+    {
+      "id": "3",
+      "transactionTime": "2025-06-16 01:34:34",
+      "account": "13800138001(深圳赛格股份有限公司)",
+      "incomeExpenseType": "支出",
+      "transactionType": "人群包",
+      "amount": -100,
+      "itemName": "(发送短信的任务名称)",
+      "balance": 9800
+    },
+    {
+      "id": "4",
+      "transactionTime": "2025-06-15 01:34:34",
+      "account": "13800138002(未认证)",
+      "incomeExpenseType": "收入",
+      "transactionType": "充值",
+      "amount": 10000,
+      "itemName": "充值",
+      "balance": 9700
+    },
+    {
+      "id": "5",
+      "transactionTime": "2025-06-14 01:34:34",
+      "account": "13800138001(深圳赛格股份有限公司)",
+      "incomeExpenseType": "支出",
+      "transactionType": "短信服务",
+      "amount": -100,
+      "itemName": "(发送短信的任务名称)",
+      "balance": 9600
+    },
+    {
+      "id": "6",
+      "transactionTime": "2025-06-13 01:34:34",
+      "account": "13800138002(未认证)",
+      "incomeExpenseType": "支出",
+      "transactionType": "人群包",
+      "amount": -100,
+      "itemName": "(发送短信的任务名称)",
+      "balance": 9500
+    },
+    {
+      "id": "7",
+      "transactionTime": "2025-06-12 01:34:34",
+      "account": "13800138001(深圳赛格股份有限公司)",
+      "incomeExpenseType": "收入",
+      "transactionType": "充值",
+      "amount": 10000,
+      "itemName": "充值",
+      "balance": 9400
+    },
+    {
+      "id": "8",
+      "transactionTime": "2025-06-11 01:34:34",
+      "account": "13800138002(未认证)",
+      "incomeExpenseType": "支出",
+      "transactionType": "短信服务",
+      "amount": -100,
+      "itemName": "(发送短信的任务名称)",
+      "balance": 9300
+    },
+    {
+      "id": "9",
+      "transactionTime": "2025-06-10 01:34:34",
+      "account": "13800138001(深圳赛格股份有限公司)",
+      "incomeExpenseType": "支出",
+      "transactionType": "人群包",
+      "amount": -100,
+      "itemName": "(发送短信的任务名称)",
+      "balance": 9200
+    },
+    {
+      "id": "10",
+      "transactionTime": "2025-06-09 01:34:34",
+      "account": "13800138002(未认证)",
+      "incomeExpenseType": "收入",
+      "transactionType": "充值",
+      "amount": 10000,
+      "itemName": "充值",
+      "balance": 9100
+    }
+  ],
+  "total": 50,
+  "success": true
+}
