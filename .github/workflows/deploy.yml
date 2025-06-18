@@ -26,7 +26,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18' # 建议使用 Ant Design Pro 推荐的 Node 版本
+          node-version: '22' # 建议使用 Ant Design Pro 推荐的 Node 版本
           cache: 'npm' # 或者 'yarn'
 
           # (可选，但推荐) 缓存依赖，加快构建速度
