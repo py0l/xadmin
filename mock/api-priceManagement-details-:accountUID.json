@@ -1,15 +1,15 @@
 {
   "data": {
-    "phoneNumber": "18279062038",
-    "enterpriseName": "人层值参身。有限公司",
+    "phoneNumber": "14787758812",
+    "enterpriseName": "教科去标率维速联方在。有限公司",
     "userRole": "普通客户",
     "dataServices": {
-      "generalDataPrice": 6.68,
-      "accurateDataPrice": 2.55
+      "generalDataPrice": 2.03,
+      "accurateDataPrice": 10.41
     },
     "marketingServices": {
-      "fiveGMessagePrice": 1.26,
-      "textMessagePrice": 0.28
+      "fiveGMessagePrice": 1.12,
+      "textMessagePrice": 0.63
     }
   },
   "success": true,
