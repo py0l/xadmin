@@ -89,10 +89,10 @@ export const errorConfig: RequestConfig = {
   requestInterceptors: [
     (config: RequestOptions) => {
       // 在text mock环境且请求是 /api/ 开头时，重定向到本地 mock JSON 文件
-      if (process.env.REACT_APP_ENV === 'test-mock' && config.url?.startsWith('/api/')) {
+      if (process.env.REACT_APP_ENV === 'pre' && config.url?.startsWith('/api/')) {
         const urlPath = config.url.replace(/^\//, ''); // 移除 /api/ 前缀
         const fileName = urlPath.replace(/\//g, '-') + '.json'; // 将斜杠替换为连字符
-        config.url = `/mock/${fileName}`;
+        config.url = `mock/${fileName}`;
         console.log(`生产环境请求重定向: ${config.url}`);
         // 拦截请求配置，进行个性化处理。
         const url = config?.url?.concat('?token = 123');
